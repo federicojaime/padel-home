@@ -2,813 +2,1868 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Universal Padel Academy - Una nueva era en la enseñanza del pádel" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Padel Academy</title>
-
-    <!-- CSS de terceros -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @keyframes gradientBg {
+        /* Variables */
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+            --white: #ffffff;
+            --gray-light: #f8f8f8;
+            --gray: #888888;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes borderAnimation {
             0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
+                width: 0;
             }
 
             100% {
-                background-position: 0% 50%;
+                width: 100px;
             }
         }
 
-        @keyframes logoGlow {
-
-            0%,
-            100% {
-                filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
-            }
-
-            50% {
-                filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.5));
-            }
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: transparent;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: var(--transition);
         }
 
-        .gradient-animate {
-            background: linear-gradient(-45deg, #1e40af, #3b82f6, #1d4ed8, #2563eb);
-            background-size: 400% 400%;
-            animation: gradientBg 15s ease infinite;
+        header.scrolled {
+            background-color: var(--black);
+            padding: 10px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .clip-path-hero {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
         }
 
-        .perspective {
-            perspective: 1000px;
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .rotate-hover {
-            transition: transform 0.5s;
-            transform-style: preserve-3d;
+        .logo {
+            height: 50px;
+            transition: var(--transition);
         }
 
-        .rotate-hover:hover {
-            transform: rotateY(10deg) rotateX(5deg);
+        .nav-links {
+            display: flex;
+            list-style: none;
         }
 
-        .nav-blur {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        .nav-links li {
+            margin-left: 30px;
         }
 
-        .highlight-hover {
+        .nav-links li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            color: var(--gold);
+        }
+
+        .btn-contact {
+            background-color: transparent;
+            color: var(--white);
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-contact:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
             position: relative;
+            height: 100vh;
+            min-height: 600px;
+            background-color: var(--black);
             overflow: hidden;
         }
 
-        .highlight-hover::after {
-            content: '';
+        .hero-image {
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            object-fit: cover;
+            opacity: 0.6;
         }
 
-        .highlight-hover:hover::after {
-            left: 100%;
+        .hero-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 60px;
+            color: var(--white);
+            z-index: 2;
         }
 
-        .mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
+        .hero-logo {
+            width: 120px;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease forwards;
         }
 
-        .mobile-menu.active {
-            transform: translateX(0);
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            animation: slideRight 1s ease forwards;
+            max-width: 800px;
         }
 
-        #preloader img {
-            animation: logoGlow 2s ease-in-out infinite;
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            height: 3px;
+            background-color: var(--gold);
+            animation: borderAnimation 1s ease forwards 0.5s;
         }
 
-        .gradient-animate {
-            animation: gradientBg 15s ease infinite;
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 40px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: slideRight 1s ease forwards 0.3s;
+        }
+
+        .highlight {
+            color: var(--gold);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: slideRight 1s ease forwards 0.6s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--black);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 1px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1s;
+        }
+
+        .scroll-indicator span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .scroll-indicator i {
+            font-size: 20px;
+            animation: slideUp 1s ease-in-out infinite alternate;
+        }
+
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-gray {
+            background-color: var(--gray-light);
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 3px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Manager Section */
+        .manager-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .manager-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .manager-image img {
+            width: 70%;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .manager-text {
+            flex: 1;
+        }
+
+        .manager-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 3px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-card i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .service-content h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .service-content p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Customize Section */
+        .customize {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .customize .section-title h2 {
+            color: var(--white);
+        }
+
+        .customize-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .customize-option {
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .customize-option:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+        }
+
+        .customize-option i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .customize-option h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .customize-option p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Location Section */
+        .location-content {
+            display: flex;
+            gap: 40px;
+        }
+
+        .location-info {
+            flex: 1;
+        }
+
+        .location-info h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .location-info h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .location-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .location-item i {
+            font-size: 20px;
+            color: var(--gold);
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+
+        .location-item div p {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .location-map {
+            flex: 2;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        /* Facilities Section - VERSIÓN ACTUALIZADA */
+        .facilities-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .facilities-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .facilities-image img {
+            width: 100%;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .facilities-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .facilities-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .facilities-list {
+            list-style: none;
+        }
+
+        .facilities-list li {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 35px;
+            font-size: 16px;
+        }
+
+        .facilities-list li i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--gold);
+            font-size: 20px;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .facility-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 3px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+            height: 100%;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-card i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .facility-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .facility-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .facility-card p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            gap: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            font-size: 20px;
+            color: var(--gold);
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+
+        .contact-item div p {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black);
+            color: var(--white);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .footer-column p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+
+            .about-content,
+            .manager-content,
+            .location-content,
+            .contact-content,
+            .facilities-container {
+                flex-direction: column;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            .values-grid,
+            .facilities-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background-color: var(--black);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .services-grid,
+            .values-grid,
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .customize-options {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .manager-image img {
+                width: 60%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .customize-options {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-column {
+                flex: 100%;
+            }
         }
     </style>
 </head>
 
-<body class="bg-black text-white font-sans">
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black">
-        <div class="relative flex flex-col items-center">
-            <div class="w-48 h-48 relative">
-                <!-- Logo -->
-                <img src="./logo-padel.png" alt="Universal Padel Logo" class="w-full h-full object-contain" width="192"
-                    height="192" data-i18n-alt-es="Universal Padel Logo" data-i18n-alt-en="Universal Padel Logo" />
-                <div class="absolute inset-0 -z-10 blur-xl bg-blue-500/20 rounded-full"></div>
-            </div>
-            <span class="text-white mt-4 tracking-[0.3em] text-sm" data-i18n="cargando">
-                CARGANDO
-            </span>
-            <div class="relative mt-8 w-32 h-32">
-                <svg class="animate-spin" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgb(252,203,137)" stroke-width="2"></circle>
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="#df973e" stroke-width="2" stroke-linecap="round"
-                        stroke-dasharray="70 283" transform="rotate(-90 50 50)"></circle>
-                </svg>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navegación -->
-    <nav class="fixed w-full z-40 transition-all duration-500">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between">
-                <a href="#" class="flex items-center">
-                    <img src="./logo-padel.png" alt="Universal Padel Logo" class="h-30 md:h-24" width="96" height="96"
-                        data-i18n-alt-es="Universal Padel Logo" data-i18n-alt-en="Universal Padel Logo" />
-                </a>
-                <button id="menuBtn" class="md:hidden z-50 relative w-10 h-10 focus:outline-none">
-                    <div class="absolute w-6 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
-                        <span class="absolute h-0.5 w-6 bg-white transform transition duration-300 rotate-0"></span>
-                        <span
-                            class="absolute h-0.5 w-6 bg-white transform transition duration-300 -translate-y-2"></span>
-                        <span
-                            class="absolute h-0.5 w-6 bg-white transform transition duration-300 translate-y-2"></span>
-                    </div>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
+            <div class="nav-container">
+                <img src="/images/logo-padel.png" alt="Universal Padel Academy" class="logo">
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
                 </button>
-
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features"
-                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
-                        data-i18n="navSobreNosotros">
-                        Sobre Nosotros
-                    </a>
-                    <a href="#contact"
-                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
-                        data-i18n="navContacto">
-                        Contacto
-                    </a>
-                    <a href="https://www.instagram.com/universalpadel_academy" target="_blank" rel="noopener noreferrer"
-                        class="flex items-center space-x-2 bg-blue-600/20 px-6 py-3 rounded-full hover:bg-blue-600/30 transition-all">
-                        <span class="text-lg" data-i18n="navSeguinos">
-                            Seguinos
-                        </span>
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07
-                   3.252.148 4.771 1.691 4.919 4.919.058 1.265.069
-                   1.645.069 4.849 0 3.205-.012 3.584-.069 4.849
-                   -.149 3.225-1.664 4.771-4.919 4.919-1.266.058
-                   -1.644.07-4.85.07-3.204 0-3.584-.012-4.849
-                   -.07-3.26-.149-4.771-1.699-4.919-4.92
-                   -.058-1.265-.07-1.644-.07-4.849 0-3.204
-                   .013-3.583.07-4.849.149-3.227 1.664-4.771
-                   4.919-4.919 1.266-.057 1.645-.069 4.849
-                   -.069zm0-2.163c-3.259 0-3.667.014-4.947
-                   .072-4.358.2-6.78 2.618-6.98 6.98-.059
-                   1.281-.073 1.689-.073 4.948 0 3.259
-                   .014 3.668.072 4.948.2 4.358 2.618
-                   6.78 6.98 6.98 1.281.058 1.689.072
-                   4.948.072 3.259 0 3.668-.014 4.948
-                   -.072 4.354-.2 6.782-2.618 6.98
-                   -6.98.059-1.28.073-1.689.073-4.948
-                   0-3.259-.014-3.667-.072-4.947-.196
-                   -4.354-2.617-6.78-6.979-6.98
-                   -1.281-.059-1.69-.073-4.949
-                   -.073zm0 5.838a6.162 6.162 0 100
-                   12.324 6.162 6.162 0 000-12.324
-                   zM12 16a4 4 0 110-8 4 4 0
-                   010 8zm6.406-11.845a1.44 1.44 0
-                   100 2.881 1.44 1.44 0 000
-                   -2.881z"></path>
-                        </svg>
-                    </a>
-                    <!-- Ícono para cambiar idioma -->
-                    <button id="languageToggle"
-                        class="p-2 text-sm border border-white/20 rounded hover:bg-white/20 transition-all flex items-center gap-2"
-                        title="Cambiar idioma">
-                        <span id="currentFlag">🇪🇸</span>
-                        <span class="text-xs opacity-50">→</span>
-                        <span id="nextFlag" class="opacity-50">🇬🇧</span>
-                    </button>
-                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#instalaciones">Instalaciones</a></li>
+                    <li><a href="#localizacion">Localización</a></li>
+                    <li><a href="#contacto" class="btn-contact">Contacto</a></li>
+                </ul>
             </div>
         </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu fixed inset-y-0 left-0 w-full bg-black/95 nav-blur z-30 md:hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-8">
-            <a href="#about" class="text-3xl font-bold hover:text-blue-500 transition-colors"
-                data-i18n="mobileSobreNosotros">
-                Sobre Nosotros
-            </a>
-            <a href="#features" class="text-3xl font-bold hover:text-blue-500 transition-colors"
-                data-i18n="mobileCaracteristicas">
-                Características
-            </a>
-            <a href="#contact" class="text-3xl font-bold hover:text-blue-500 transition-colors"
-                data-i18n="mobileContacto">
-                Contacto
-            </a>
-            <a href="https://www.instagram.com/universalpadel_academy"
-                class="text-3xl font-bold hover:text-blue-500 transition-colors" data-i18n="mobileInstagram">
-                Instagram
-            </a>
-
-            <!-- Language Toggle for Mobile -->
-            <button id="mobileLanguageToggle"
-                class="mt-8 p-4 text-xl border border-white/20 rounded-xl hover:bg-white/20 transition-all flex items-center gap-3"
-                title="Cambiar idioma">
-                <span id="mobileCurrentFlag">🇪🇸</span>
-                <span class="text-sm opacity-50">→</span>
-                <span id="mobileNextFlag" class="opacity-50">🇬🇧</span>
-            </button>
-        </div>
-    </div>
+    </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen bg-black overflow-hidden clip-path-hero">
-        <div class="absolute inset-0">
-            <img src="./hero.jpg" alt="Padel Court"
-                class="w-full h-full object-cover scale-105 filter brightness-75 contrast-125" width="1920"
-                height="1080" data-i18n-alt-es="Cancha de Padel" data-i18n-alt-en="Padel Court" />
-            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-            <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-600/20 rounded-full filter blur-3xl"></div>
-            <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-400/20 rounded-full filter blur-3xl"></div>
-        </div>
+    <section class="hero" id="inicio">
+        <img src="/images/hero1.jpg" alt="Pádel" class="hero-image">
+        <div class="container">
+            <div class="hero-content">
+                <img src="/images/logo-padel.png" alt="Universal Padel Academy" class="hero-logo">
+                <h1>Universal <span class="highlight">Padel</span> Academy</h1>
+                <p>Un espacio dedicado íntegramente al deporte que amamos... Pádel, pádel y más pádel. Un deporte
+                    universal que no conoce fronteras.</p>
+                <div class="hero-buttons">
+                    <a href="#servicios" class="btn btn-primary">Nuestros Servicios</a>
+                    <a href="#contacto" class="btn btn-secondary">Contáctanos</a>
+                </div>
 
-        <div class="relative z-20 container mx-auto px-6 h-screen flex flex-col justify-center">
-            <div class="max-w-5xl mx-auto text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8">
-                    <span class="block bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-400"
-                        data-i18n="heroLinea1">
-                        Una nueva era en la
-                    </span>
-                    <span class="block mt-2 text-white" data-i18n="heroLinea2">
-                        enseñanza del pádel
-                    </span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
-                    data-i18n="heroParrafo">
-                    Fusionamos tecnología avanzada y metodología exclusiva para
-                    crear la próxima generación de jugadores de pádel
-                </p>
-
-                <!-- Banner de construcción -->
-                <div class="inline-block group">
-                    <div
-                        class="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600/10 via-blue-400/10 to-blue-600/10 backdrop-blur-sm border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
-                        <div class="flex items-center justify-center space-x-4">
-                            <div class="relative">
-                                <span
-                                    class="absolute inset-0 w-full h-full bg-blue-500/30 rounded-full animate-ping"></span>
-                                <span class="relative block w-3 h-3 bg-blue-500 rounded-full"></span>
-                            </div>
-                            <div class="flex flex-col items-start">
-                                <span class="text-blue-300 text-sm font-medium uppercase tracking-wider"
-                                    data-i18n="proximamente">
-                                    Próximamente
-                                </span>
-                                <span class="text-white/80 text-xs" data-i18n="sitioConstruccion">
-                                    Sitio en construcción
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Ubicación con media query para adaptarse a móvil y escritorio -->
+                <div class="location-desktop">
+                    <a href="https://maps.google.com/?q=Avenida+del+Alcalde+Eduardo+Zaplana+7+03502+Benidorm+Alicante+España"
+                        target="_blank" style="display: flex; align-items: center; text-decoration: none;">
+                        <span class="highlight"
+                            style="font-weight: bold; font-size: 20px; margin-right: 10px;">BENIDORM, ALICANTE
+                            ESPAÑA</span>
+                        <i class="fas fa-map-marker-alt" style="color: var(--gold); font-size: 24px;"></i>
+                    </a>
                 </div>
             </div>
-        </div>
-
-        <!-- Botón "Ver más" -->
-        <button onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})"
-            class="absolute bottom-14 left-1/2 transform -translate-x-1/2 group flex flex-col items-center gap-3 hover:opacity-100 transition-all duration-300 opacity-80"
-            data-i18n="heroVerMas">
-            <div class="relative w-8 h-8">
-                <span
-                    class="absolute inset-0 w-full h-full bg-blue-500/20 rounded-full group-hover:bg-blue-500/30 transition-colors"></span>
-                <svg class="w-8 h-8 text-blue-400 animate-bounce group-hover:text-blue-300 transition-colors"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
+            <div class="location-mobile">
+                <a href="https://maps.google.com/?q=Avenida+del+Alcalde+Eduardo+Zaplana+7+03502+Benidorm+Alicante+España"
+                    target="_blank" style="display: flex; align-items: center; text-decoration: none;">
+                    <span class="highlight" style="font-weight: bold; font-size: 18px; margin-right: 10px;">BENIDORM,
+                        ALICANTE ESPAÑA</span>
+                    <i class="fas fa-map-marker-alt" style="color: var(--gold); font-size: 22px;"></i>
+                </a>
             </div>
-        </button>
+            <style>
+                /* Estilos para ubicación responsiva */
+                .location-desktop {
+                    position: absolute;
+                    right: 30px;
+                    bottom: 10px;
+                    z-index: 10;
+                }
+
+                .location-mobile {
+                    display: none;
+                    justify-content: center;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    padding: 10px 0;
+                    margin: 10px 10px 10px 10px;
+                    position: relative;
+                    z-index: 10;
+                }
+
+                @media (max-width: 768px) {
+                    .location-desktop {
+                        display: none;
+                    }
+
+                    .location-mobile {
+                        display: none;
+                    }
+                }
+            </style>
+            
+        </div>
+        </div>
+        <a href="#sobre-nosotros" class="scroll-indicator">
+            <span>Descubre más</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-32 relative overflow-hidden">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-i18n="featuresTitulo">
-                Experiencia Premium
-            </h2>
-            <div id="features-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="feature-item opacity-0 translate-y-10">
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <img src="./1.jpg" alt="Equipamiento Profesional" class="w-full h-80 object-cover"
-                            data-i18n-alt-es="Equipamiento Profesional" data-i18n-alt-en="Professional Equipment" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h3 class="text-2xl font-bold mb-2" data-i18n="feature1Titulo">
-                                Equipamiento Elite
-                            </h3>
-                            <p class="text-gray-300" data-i18n="feature1Desc">
-                                Tecnología de última generación para maximizar tu rendimiento
-                            </p>
+    <!-- About Section -->
+    <section class="section section-gray" id="sobre-nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nosotros</h2>
+                <p>Somos Universal Padel Academy, una marca con una visión del pádel de 360 grados</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Universal Padel Academy es una marca de nueva creación que tiene una visión del pádel de 360
+                        grados. Está formada por un equipo multidisciplinar con una amplia experiencia en el sector del
+                        pádel, y dirigida por Claudio Gilardoni. Además contamos con la colaboración especial de Paulita
+                        Josemaría número 1 y Agustín Gutiérrez número 30 del ranking mundial.</p>
+                    <p>Trabajamos desde una perspectiva global que fusiona la táctica, técnica, preparación física,
+                        entrenamiento mental y nutrición. A través de nuestra metodología pretendemos motivar, inspirar
+                        y ayudar a los jugadores profesionales, entusiastas y jóvenes talentos a alcanzar su mayor
+                        potencial y desarrollo personal.</p>
+                    <p>La pasión y experiencia de nuestro equipo técnico en el pádel, se extiende más allá de la pista.
+                        Contribuimos día a día al crecimiento y la expansión del pádel, gracias a nuestros programas de
+                        formación para coaches y el soporte e impulso que ofrecemos a clubs de pádel, que quieren dar un
+                        plus profesional a su negocio implantando nuestra metodología de trabajo.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/images/nosotros.jpg" alt="Universal Padel Academy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manager Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestro General Manager</h2>
+                <p>Claudio Gilardoni, un talento del front row del pádel</p>
+            </div>
+            <div class="manager-content">
+                <div class="manager-image">
+                    <img src="/images/claudio.jpg" alt="Claudio Gilardoni">
+                </div>
+                <div class="manager-text">
+                    <p>Un talento del front row del pádel con más de 23 años de experiencia profesional. Sus comienzos
+                        fueron en la cuna del pádel, su Argentina natal, allí se formó y se inició como coach de
+                        jugadores. Años después se trasladó a España, para trabajar como coach de jugadores
+                        profesionales de la élite del pádel, que han competido en el circuito World Padel Tour y que
+                        actualmente compiten en el circuito mundial Premier Padel.</p>
+                    <p>Ha entrenado a jugadores como Sanyo Gutiérrez, Agustín Gutiérrez, Josete Rico, Javier Rico y
+                        Paula Josemaría entre otros. También ha trabajado en equipo con binomios entre los que se
+                        encuentran Fernando Belasteguín, Agustín Tapia, Juan Martín Díaz, Franco Stupazuck y Ari
+                        Sánchez.</p>
+                    <p>Por otro lado, ha sido director deportivo en la Academia de Pádel Equelite hasta la temporada
+                        2024, y ahora comienza una nueva etapa sumando a su trabajo como coach el liderazgo de Universal
+                        Padel Academy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Valores</h2>
+                <p>Tus valores te definen y los nuestros son:</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Trabajo en Equipo</h3>
+                    <p>Colaboración y esfuerzo conjunto para lograr objetivos comunes.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Disciplina</h3>
+                    <p>Constancia y método para el desarrollo de habilidades.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Respeto</h3>
+                    <p>Consideración hacia todos los miembros de nuestra comunidad.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Perseverancia</h3>
+                    <p>Firmeza y constancia en la consecución de objetivos.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Resiliencia</h3>
+                    <p>Capacidad de adaptación frente a las adversidades.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Crecimiento Personal</h3>
+                    <p>Desarrollo continuo de capacidades y habilidades.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Excelencia</h3>
+                    <p>Búsqueda constante de la calidad superior en todo lo que hacemos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>En nuestra academia ofrecemos un servicio integral adaptado a las necesidades de todos los jugadores
+                    de pádel independientemente de su nivel.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/entrenamiento.jpg" alt="Escuela Amateur">
+                    </div>
+                    <div class="service-content">
+                        <h3>Escuela Amateur</h3>
+                        <p>Clases de pádel para todos los niveles, desde principiantes hasta jugadores avanzados que
+                            quieren mejorar su técnica y disfrutar del deporte.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/escuela.jpg" alt="Academia Competición Menores">
+                    </div>
+                    <div class="service-content">
+                        <h3>Academia Competición Menores</h3>
+                        <p>Entrenamiento especializado para jóvenes talentos que quieren desarrollar su potencial y
+                            prepararse para la competición.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/Academia.jpg" alt="Academia Profesional">
+                    </div>
+                    <div class="service-content">
+                        <h3>Academia Profesional</h3>
+                        <p>Programas de alto rendimiento para jugadores profesionales o que aspiran a serlo, con
+                            entrenamiento personalizado.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/entrenamient2o.jpg" alt="Stages">
+                    </div>
+                    <div class="service-content">
+                        <h3>Stages</h3>
+                        <p>Experiencias intensivas para jugadores que quieran acudir a nuestra sede principal en España,
+                            desde 3 días hasta un mes.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/coach-training.jpg" alt="Formación Coach">
+                    </div>
+                    <div class="service-content">
+                        <h3>Formación Coach</h3>
+                        <p>Programas intensivos para entrenadores que les permitirá adquirir o perfeccionar sus
+                            habilidades, así como mantener actualizados y mejorar sus conocimientos.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/events.jpg" alt="Eventos Deportivos">
+                    </div>
+                    <div class="service-content">
+                        <h3>Organización de Eventos Deportivos</h3>
+                        <p>Planificación y ejecución de eventos relacionados con el pádel, desde torneos locales hasta
+                            competiciones de mayor envergadura.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customize Section -->
+    <section class="section customize">
+        <div class="container">
+            <div class="section-title">
+                <h2>Personaliza Tu Visita</h2>
+                <p>Para darle un plus a tu experiencia, te ofrecemos distintos servicios extras que puedes contratar con
+                    nosotros.</p>
+            </div>
+            <div class="customize-options">
+                <div class="customize-option">
+                    <i class="fas fa-bed"></i>
+                    <h3>Alojamiento</h3>
+                    <p>Alojamiento y desayuno en hoteles cercanos a nuestra academia.</p>
+                </div>
+                <div class="customize-option">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Clase Extra</h3>
+                    <p>Clase extra de pádel individual para mejorar aspectos específicos.</p>
+                </div>
+                <div class="customize-option">
+                    <i class="fas fa-plane-arrival"></i>
+                    <h3>Transfer Aeropuerto</h3>
+                    <p>Transfer para el traslado del aeropuerto/tren al hotel para tu comodidad.</p>
+                </div>
+                <div class="customize-option">
+                    <i class="fas fa-shuttle-van"></i>
+                    <h3>Transfer Academia</h3>
+                    <p>Transfer para el traslado del hotel a la academia durante tu estancia.</p>
+                </div>
+                <div class="customize-option">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <h3>Actividades Free Time</h3>
+                    <p>Parques temáticos, acuáticos, de naturaleza, reservas naturales, safari y mucho más.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section section-gray" id="localizacion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visítanos</h2>
+                <p>Universal Padel Academy se encuentra en un entorno y una ubicación privilegiada.</p>
+            </div>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Dirección:</h3>
+                    <div class="location-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <p>Universal Padel Academy, Club Padelpoint Villaitana</p>
+                            <p>Avenida del Alcalde Eduardo Zaplana nº7</p>
+                            <p>03502 Benidorm (Alicante)</p>
+                        </div>
+                    </div>
+
+                    <h3>Información de interés:</h3>
+                    <div class="location-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <p>A menos de 3 km de Benidorm</p>
+                            <p>A 20 minutos en coche de Alicante</p>
+                            <p>A 25 minutos del aeropuerto de Alicante</p>
                         </div>
                     </div>
                 </div>
-                <div class="feature-item opacity-0 translate-y-10">
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <img src="./2.jpg" alt="Instalaciones Premium" class="w-full h-80 object-cover"
-                            data-i18n-alt-es="Instalaciones Premium" data-i18n-alt-en="Premium Facilities" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h3 class="text-2xl font-bold mb-2" data-i18n="feature2Titulo">
-                                Instalaciones Premium
-                            </h3>
-                            <p class="text-gray-300" data-i18n="feature2Desc">
-                                Canchas profesionales diseñadas para la excelencia
-                            </p>
-                        </div>
-                    </div>
+                <div class="location-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3126.6463013416226!2d-0.1587029!3d38.5667925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6210a6eaf32e85%3A0xb02269f187e23de3!2sAv.%20Alcalde%20Eduardo%20Zaplana%2C%207%2C%2003502%20Benidorm%2C%20Alicante!5e0!3m2!1ses!2ses!4v1648201234567!5m2!1ses!2ses"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="feature-item opacity-0 translate-y-10">
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <img src="./3.jpg" alt="Entrenamiento Personalizado" class="w-full h-80 object-cover"
-                            data-i18n-alt-es="Entrenamiento Personalizado" data-i18n-alt-en="Personalized Training" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h3 class="text-2xl font-bold mb-2" data-i18n="feature3Titulo">
-                                Entrenamiento Personalizado
-                            </h3>
-                            <p class="text-gray-300" data-i18n="feature3Desc">
-                                Metodología exclusiva adaptada a tu nivel
-                            </p>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section - VERSIÓN ACTUALIZADA -->
+    <section class="section" id="instalaciones">
+        <div class="container">
+            <div class="section-title">
+                <h2>Instalaciones</h2>
+                <p>Disfruta de instalaciones de primera calidad en un entorno privilegiado con vistas a la Gran Bahía de
+                    Costa Blanca.</p>
+            </div>
+
+            <div class="facilities-container">
+                <div class="facilities-image">
+                    <img src="/images/court-panoramic.jpg" alt="Pistas de Pádel">
+                </div>
+
+                <div class="facilities-content">
+                    <p>El club cuenta con 7 pistas de pádel totalmente equipadas. 3 pistas panorámicas con suelo Mondo
+                        Premier Padel y otras 4 pistas con césped azul, todas ellas con vistas a la Gran Bahía de Costa
+                        Blanca.</p>
+                    <br>
+                    <ul class="facilities-list">
+                        <li><i class="fas fa-dumbbell"></i> <strong>Gimnasio</strong> equipado con máquinas de última
+                            generación para tu preparación física.</li>
+                        <li><i class="fas fa-hot-tub"></i> <strong>Spa</strong> con circuito de aguas para tu
+                            recuperación después del entrenamiento.</li>
+                        <li><i class="fas fa-tshirt"></i> <strong>Vestuarios privados</strong> con todas las comodidades
+                            para nuestros alumnos.</li>
+                        <li><i class="fas fa-coffee"></i> <strong>Bar & Lounge</strong> donde podrás relajarte y
+                            socializar después de tus partidos.</li>
+                        <li><i class="fas fa-store"></i> <strong>Tienda especializada</strong> en equipación deportiva
+                            de pádel.</li>
+                        <li><i class="fas fa-parking"></i> <strong>Parking gratuito</strong> para todos nuestros
+                            clientes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <i class="fas fa-map"></i>
+                    <h3>Pistas Panorámicas</h3>
+                    <p>3 pistas panorámicas con suelo Mondo Premier Padel y vistas espectaculares.</p>
+                </div>
+
+                <div class="facility-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Pistas de Césped Azul</h3>
+                    <p>4 pistas con césped azul de última generación y excepcional jugabilidad.</p>
+                </div>
+
+                <div class="facility-card">
+                    <i class="fas fa-water"></i>
+                    <h3>Vistas a la Bahía</h3>
+                    <p>Todas nuestras instalaciones disfrutan de vistas a la Gran Bahía de Costa Blanca.</p>
+                </div>
+
+                <div class="facility-card">
+                    <i class="fas fa-concierge-bell"></i>
+                    <h3>Servicios Premium</h3>
+                    <p>Instalaciones de primera calidad diseñadas para jugadores exigentes.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="relative py-32 overflow-hidden">
-        <div class="absolute inset-0 gradient-animate opacity-10"></div>
-        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full filter blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full filter blur-3xl"></div>
-
-        <div class="container mx-auto px-6 relative">
-            <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8" data-i18n="contactTitulo">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-white">
-                        Únete a la Revolución
-                    </span>
-                </h2>
-                <p class="text-xl text-gray-300 mb-12 leading-relaxed" data-i18n="contactParrafo">
-                    Sé el primero en conocer nuestra fecha de apertura y recibe acceso exclusivo
-                    a nuestros programas de entrenamiento
-                </p>
-
-                <form class="space-y-8" id="contactForm">
-                    <div class="relative group">
-                        <input type="email" id="emailInput" name="emailInput" required
-                            placeholder="Tu correo electrónico" class="w-full bg-gray-800 border border-blue-500/30 rounded-xl 
-                                   px-6 py-4 text-white placeholder-gray-300
-                                   focus:border-blue-400 focus:bg-gray-700 
-                                   transition-all duration-300 outline-none text-lg"
-                            data-i18n-placeholder-es="Tu correo electrónico"
-                            data-i18n-placeholder-en="Your email address" />
+    <section class="section section-gray" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacto</h2>
+                <p>¿Estás interesado en nuestros servicios? ¡Contáctanos y estaremos encantados de atenderte!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <p>Email:</p>
+                            <p>info@universalpadelacademy.com</p>
+                        </div>
                     </div>
-
-                    <button type="submit" class="relative w-full group overflow-hidden" data-i18n="contactBoton">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 
-                                    opacity-50 group-hover:opacity-70 transition-opacity duration-500 rounded-xl">
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <p>Web:</p>
+                            <p>www.universalpadelacademy.com</p>
                         </div>
-                        <div class="absolute inset-0 transform translate-x-[-100%] group-hover:translate-x-[100%] 
-                                    bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                                    transition-transform duration-1000">
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <p>Dirección:</p>
+                            <p>Avenida del Alcalde Eduardo Zaplana nº7</p>
+                            <p>03502 Benidorm (Alicante)</p>
                         </div>
-                        <div class="relative px-8 py-4 rounded-xl border border-blue-400/30 
-                                    bg-black/30 backdrop-blur-sm">
-                            <div class="flex items-center justify-center gap-3">
-                                <span class="text-lg font-semibold text-white">Registrarme</span>
-                                <svg class="w-6 h-6 text-blue-300 transform group-hover:translate-x-1 transition-transform"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                                </svg>
-                            </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://instagram.com/universalpadel_academy" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/universalpadelacademy" class="social-link" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/universalpadel" class="social-link" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://youtube.com/universalpadelacademy" class="social-link" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder="Nombre y Apellidos" required>
                         </div>
-                    </button>
-                </form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" id="phone" placeholder="Teléfono">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="service" required>
+                                <option value="" disabled selected>Servicio de interés</option>
+                                <option value="escuela-amateur">Escuela Amateur</option>
+                                <option value="academia-competicion">Academia Competición Menores</option>
+                                <option value="academia-profesional">Academia Profesional</option>
+                                <option value="stages">Stages</option>
+                                <option value="formacion-coach">Formación Coach</option>
+                                <option value="eventos">Organización de Eventos</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="message" rows="5" placeholder="Mensaje"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                        <div id="formStatus" style="margin-top: 15px; display: none;"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
+
     <!-- Footer -->
-    <footer class="py-12 border-t border-white/10">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 mb-4 md:mb-0" data-i18n="footerDerechos">
-                    &copy; 2025 Universal Padel Academy
-                </p>
-                <!-- Desarrollado por @Codeo.Ar con su logo -->
-                <div class="flex items-center space-x-2 mt-6 md:mt-4">
-                    <p class="text-gray-500" data-i18n="footerDesarrolladoPor">Desarrollado por</p>
-                    <a href="https://www.instagram.com/codeo.ar" target="_blank" rel="noopener noreferrer"
-                        class="flex items-center hover:text-white transition-colors" data-i18n="footerCodeo">
-                        <img src="icon.png" alt="Codeo Logo" class="h-6 w-6 mr-1" />
-                        <span class="text-gray-500">@Codeo.Ar</span>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Universal Padel Academy</h3>
+                    <p>Un espacio dedicado íntegramente al deporte que amamos. Pádel, pádel y más pádel.</p>
+                    <p>Este divertido deporte te atrapa y no conoce fronteras, se practica en los 5 continentes y es
+                        capaz de unir a distintas nacionalidades, culturas y lenguas haciéndolo universal.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#instalaciones">Instalaciones</a></li>
+                        <li><a href="#localizacion">Localización</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horarios</h3>
+                    <ul class="footer-links">
+                        <li>Lunes a Viernes: 9:00 - 22:00</li>
+                        <li>Sábado: 9:00 - 20:00</li>
+                        <li>Domingo: 9:00 - 14:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Universal Padel Academy. Todos los derechos reservados.</p>
+                <div class="codeo-container">
+                    Diseñado por
+                    <a href="https://codeo.site/" class="codeo-link">
+                        <img src="icon.png" alt="Codeo" class="codeo-logo" />
+                        <span class="typewriter-text"></span>
                     </a>
                 </div>
+                <!-- CSS para el efecto de typewriter y el logo -->
+                <style>
+                    .codeo-container {
+                        display: inline-flex;
+                        align-items: center;
+                        margin-top: 5px;
+                    }
+
+                    .codeo-logo {
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 5px;
+                        margin-right: 3px;
+                        vertical-align: middle;
+                    }
+
+                    .codeo-link {
+                        display: inline-flex;
+                        align-items: center;
+                        color: #cbd5e1;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                        position: relative;
+                    }
+
+                    .codeo-link:hover {
+                        color: white;
+                    }
+
+                    .typewriter-text {
+                        display: inline-block;
+                        overflow: hidden;
+                        width: 0;
+                        height: 1.2em;
+                        white-space: nowrap;
+                    }
+
+                    .codeo-link:hover .typewriter-text {
+                        animation: typing 1s steps(8) forwards;
+                    }
+
+                    .codeo-link:not(:hover) .typewriter-text {
+                        animation: erasing 0.5s steps(8) forwards;
+                    }
+
+                    @keyframes typing {
+                        from {
+                            width: 0;
+                        }
+
+                        to {
+                            width: 9ch;
+                        }
+
+                        /* Aumentado de 7ch a 8ch para dar espacio a la "R" */
+                    }
+
+                    @keyframes erasing {
+                        from {
+                            width: 9ch;
+                        }
+
+                        /* Aseguramos que coincida con el valor en typing */
+                        to {
+                            width: 0;
+                        }
+                    }
+                </style>
+
+                <!-- JavaScript para inicializar y controlar el efecto -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const typewriterText = document.querySelector('.typewriter-text');
+                        typewriterText.setAttribute('data-text', 'Codeo.AR ');
+
+                        // Función para activar el efecto typewriter
+                        const handleHover = () => {
+                            typewriterText.textContent = 'Codeo.AR ';
+                        };
+
+                        // Función para borrar el texto
+                        const handleMouseLeave = () => {
+                            // El CSS se encargará de la animación de borrado
+                        };
+
+                        // Agregar eventos
+                        const codeoLink = document.querySelector('.codeo-link');
+                        codeoLink.addEventListener('mouseenter', handleHover);
+                        codeoLink.addEventListener('mouseleave', handleMouseLeave);
+                    });
+                </script>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- JavaScript -->
     <script>
+        // Código JavaScript corregido para el formulario de contacto
 
-        // Registro de plugins
-        gsap.registerPlugin(ScrollTrigger);
+        // Toggle mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
 
-        // Preloader A
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                gsap.to(preloader, {
-                    opacity: 0,
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    onComplete: () => {
-                        preloader.style.display = 'none';
-                        startAnimations();
-                    },
-                });
-            }
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        // Iniciar animaciones de GSAP
-        function startAnimations() {
-            // Se pueden poner animaciones iniciales aquí si se desea
-        }
+        // Close mobile menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
 
-        // Scroll suave en anclas
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 90,
+                        behavior: 'smooth'
                     });
-                    // Cerrar menú móvil si está abierto
-                    mobileMenu.classList.remove('active');
                 }
             });
         });
 
-        // Efecto en el header al hacer scroll
-        const header = document.querySelector('nav');
-        let lastScroll = 0;
-        let scrollTimeout;
-
+        // Change header style on scroll
         window.addEventListener('scroll', () => {
-            if (scrollTimeout) return;
-            scrollTimeout = setTimeout(() => {
-                const currentScroll = window.pageYOffset;
-                if (currentScroll <= 0) {
-                    header?.classList.remove('py-4', 'bg-black/80', 'nav-blur');
-                } else if (currentScroll > lastScroll) {
-                    header?.classList.add('py-4', 'bg-black/80', 'nav-blur');
-                }
-                lastScroll = currentScroll;
-                scrollTimeout = null;
-            }, 50);
-        });
-
-        // Menú móvil
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const menuBtnSpans = menuBtn?.querySelectorAll('span');
-        if (menuBtn && mobileMenu && menuBtnSpans) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-                menuBtnSpans[0].classList.toggle('rotate-45');
-                menuBtnSpans[0].classList.toggle('translate-y-2');
-                menuBtnSpans[1].classList.toggle('opacity-0');
-                menuBtnSpans[2].classList.toggle('-rotate-45');
-                menuBtnSpans[2].classList.toggle('-translate-y-2');
-            });
-        }
-
-        // Formulario: enviar a Google Sheets
-        const contactForm = document.getElementById('contactForm');
-        const emailInput = document.getElementById('emailInput');
-
-        if (contactForm && emailInput) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const email = emailInput.value;
-                const button = e.target.querySelector('button');
-                const originalText = button.innerHTML;
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                // Mensajes de estado (ES por defecto)
-                const MESSAGES = {
-                    es: {
-                        invalid: 'Email inválido',
-                        sending: 'Enviando...',
-                        success: '¡Registrado con éxito!',
-                        error: 'Error al enviar'
-                    },
-                    en: {
-                        invalid: 'Invalid email',
-                        sending: 'Sending...',
-                        success: 'Successfully registered!',
-                        error: 'Error sending'
-                    }
-                };
-
-                // Detectar idioma actual
-                const currentLang = document.documentElement.getAttribute('lang') || 'es';
-
-                if (!emailRegex.test(email)) {
-                    showFormMessage(button, 'error', MESSAGES[currentLang].invalid);
-                    return;
-                }
-
-                showFormMessage(button, 'loading', MESSAGES[currentLang].sending);
-
-                // TU URL DE GOOGLE APPS SCRIPT AQUI:
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbxCCFhGT-gNIBX7ErChiNW9fNJErp_HkJJWsK2q8ncq5M_Rq9H6dUw7sGpJT3vc9i7x/exec';
-
-                try {
-                    await fetch(scriptURL, {
-                        method: 'POST',
-                        body: new FormData(contactForm),
-                    });
-                    showFormMessage(button, 'success', MESSAGES[currentLang].success);
-                    emailInput.value = '';
-                } catch (error) {
-                    showFormMessage(button, 'error', MESSAGES[currentLang].error);
-                }
-
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                }, 2000);
-            });
-        }
-
-        function showFormMessage(button, type, message) {
-            const icons = {
-                error: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>`,
-                success: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 13l4 4L19 7"></path>
-                        </svg>`,
-                loading: `<svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <circle class="opacity-25" cx="12" cy="12" r="10"
-                                  stroke="currentColor" stroke-width="4"></circle>
-                          <path class="opacity-75" fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 
-                                   0 5.373 0 12h4zm2 5.291A7.962 
-                                   7.962 0 014 12H0c0 3.042 1.135 
-                                   5.824 3 7.938l3-2.647z">
-                          </path>
-                        </svg>`
-            };
-            const colors = {
-                error: 'text-red-400',
-                success: 'text-green-400',
-                loading: 'text-white'
-            };
-            button.innerHTML = `
-                <span class="flex items-center justify-center gap-2 ${colors[type]}">
-                    ${icons[type]}
-                    <span>${message}</span>
-                </span>
-            `;
-        }
-    </script>
-    <script>
-        // Animación de aparición secuencial para features
-        document.addEventListener('DOMContentLoaded', () => {
-            const items = document.querySelectorAll('.feature-item');
-
-            gsap.to(items, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                stagger: 0.3,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '#features-grid',
-                    start: 'top 80%',
-                },
-            });
-        });
-    </script>
-
-    <!-- SCRIPT DE CAMBIO DE IDIOMA -->
-    <script>
-        // Idioma por defecto
-        let currentLang = 'es';
-        document.documentElement.setAttribute('lang', currentLang);
-
-        // Objeto con traducciones
-        const i18n = {
-            es: {
-                navSobreNosotros: "Sobre Nosotros",
-                navContacto: "Contacto",
-                navSeguinos: "Seguinos",
-                mobileSobreNosotros: "Sobre Nosotros",
-                mobileCaracteristicas: "Características",
-                mobileContacto: "Contacto",
-                mobileInstagram: "Instagram",
-                cargando: "CARGANDO",
-                heroLinea1: "Una nueva era en la",
-                heroLinea2: "enseñanza del pádel",
-                heroParrafo: "Fusionamos tecnología avanzada y metodología exclusiva para crear la próxima generación de jugadores de pádel",
-                proximamente: "Próximamente",
-                sitioConstruccion: "Sitio en construcción",
-                heroVerMas: "", // Este botón solo tiene ícono, si deseas texto, colócalo aquí
-                featuresTitulo: "Experiencia Premium",
-                feature1Titulo: "Equipamiento Elite",
-                feature1Desc: "Tecnología de última generación para maximizar tu rendimiento",
-                feature2Titulo: "Instalaciones Premium",
-                feature2Desc: "Canchas profesionales diseñadas para la excelencia",
-                feature3Titulo: "Entrenamiento Personalizado",
-                feature3Desc: "Metodología exclusiva adaptada a tu nivel",
-                contactTitulo: "Únete a la Revolución",
-                contactParrafo: "Sé el primero en conocer nuestra fecha de apertura y recibe acceso exclusivo a nuestros programas de entrenamiento",
-                contactBoton: "Registrarme",
-                footerDerechos: "&copy; 2025 Universal Padel Academy",
-                footerDesarrolladoPor: "Desarrollado por",
-                footerCodeo: "@Codeo.Ar"
-            },
-            en: {
-                navSobreNosotros: "About Us",
-                navContacto: "Contact",
-                navSeguinos: "Follow Us",
-                mobileSobreNosotros: "About Us",
-                mobileCaracteristicas: "Features",
-                mobileContacto: "Contact",
-                mobileInstagram: "Instagram",
-                cargando: "LOADING",
-                heroLinea1: "A new era in",
-                heroLinea2: "padel coaching",
-                heroParrafo: "We combine advanced technology with an exclusive methodology to create the next generation of padel players",
-                proximamente: "Coming Soon",
-                sitioConstruccion: "Website under construction",
-                heroVerMas: "",
-                featuresTitulo: "Premium Experience",
-                feature1Titulo: "Elite Equipment",
-                feature1Desc: "State-of-the-art technology to maximize your performance",
-                feature2Titulo: "Premium Facilities",
-                feature2Desc: "Professional courts designed for excellence",
-                feature3Titulo: "Personalized Training",
-                feature3Desc: "Exclusive methodology tailored to your level",
-                contactTitulo: "Join the Revolution",
-                contactParrafo: "Be the first to know our opening date and get exclusive access to our training programs",
-                contactBoton: "Sign Up",
-                footerDerechos: "&copy; 2025 Universal Padel Academy",
-                footerDesarrolladoPor: "Developed by",
-                footerCodeo: "@Codeo.Ar"
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
+        });
+
+        // Animate elements when scrolling into view
+        const observerOptions = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.2
         };
 
-        // Función para cambiar idioma
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.setAttribute('lang', lang);
-
-            // Cambiar texto a cada elemento con data-i18n
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.innerHTML = i18n[lang][key] || el.innerHTML;
-            });
-
-            // Cambiar placeholders
-            const placeHolders = document.querySelectorAll('[data-i18n-placeholder-es]');
-            placeHolders.forEach(el => {
-                if (lang === 'es') {
-                    el.placeholder = el.getAttribute('data-i18n-placeholder-es') || el.placeholder;
-                } else {
-                    el.placeholder = el.getAttribute('data-i18n-placeholder-en') || el.placeholder;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-visible');
+                    observer.unobserve(entry.target);
                 }
             });
+        }, observerOptions);
 
-            // Cambiar alt de imágenes
-            const altImages = document.querySelectorAll('[data-i18n-alt-es]');
-            altImages.forEach(img => {
-                if (lang === 'es') {
-                    img.alt = img.getAttribute('data-i18n-alt-es') || img.alt;
-                } else {
-                    img.alt = img.getAttribute('data-i18n-alt-en') || img.alt;
-                }
-            });
-        }
+        // JavaScript para la página HTML
+        document.addEventListener('DOMContentLoaded', () => {
+            // Otras funcionalidades de la página
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
 
-        // Botón de cambio de idioma
-        const languageToggle = document.getElementById('languageToggle');
-        const currentFlag = document.getElementById('currentFlag');
-        const nextFlag = document.getElementById('nextFlag');
-
-        function updateFlags(lang) {
-            if (lang === 'es') {
-                currentFlag.textContent = '🇪🇸';
-                nextFlag.textContent = '🇬🇧';
-            } else {
-                currentFlag.textContent = '🇬🇧';
-                nextFlag.textContent = '🇪🇸';
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
             }
-        }
 
-        if (languageToggle) {
-            languageToggle.addEventListener('click', () => {
-                const newLang = currentLang === 'es' ? 'en' : 'es';
-                changeLanguage(newLang);
-                updateFlags(newLang);
+            // Close mobile menu when clicking on a link
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
             });
-        }
-    </script>
-    <script>
-        // Mobile language toggle functionality
-        const mobileLanguageToggle = document.getElementById('mobileLanguageToggle');
-        const mobileCurrentFlag = document.getElementById('mobileCurrentFlag');
-        const mobileNextFlag = document.getElementById('mobileNextFlag');
 
-        function updateMobileFlags(lang) {
-            if (lang === 'es') {
-                mobileCurrentFlag.textContent = '🇪🇸';
-                mobileNextFlag.textContent = '🇬🇧';
-            } else {
-                mobileCurrentFlag.textContent = '🇬🇧';
-                mobileNextFlag.textContent = '🇪🇸';
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 90,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Change header style on scroll
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (header) {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }
+            });
+
+            // Animate elements when scrolling into view
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Animate sections on scroll
+            document.querySelectorAll('.section-title, .about-text, .about-image, .manager-image, .manager-text, .value-card, .service-card, .customize-option, .location-info, .location-map, .facilities-image, .facilities-content, .facilities-list li, .facility-card, .contact-info, .contact-form').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Form submission using JSONP to avoid CORS issues
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('formStatus') ||
+                (() => {
+                    const div = document.createElement('div');
+                    div.id = 'formStatus';
+                    div.style.marginTop = '15px';
+                    div.style.display = 'none';
+                    contactForm.appendChild(div);
+                    return div;
+                })();
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Ocultar mensajes anteriores y mostrar indicador de carga
+                    formStatus.style.display = 'none';
+
+                    const submitBtn = contactForm.querySelector('.btn-submit');
+                    const originalBtnText = submitBtn.textContent;
+                    submitBtn.textContent = 'Enviando...';
+                    submitBtn.disabled = true;
+
+                    // Obtener datos del formulario
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const service = document.getElementById('service').value;
+                    const message = document.getElementById('message').value;
+
+                    // URL completa del script de Google Apps Script con /exec al final
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbzePuT3erjk6ntwQXBtTdwOHGlhjqceY8OTRYsxK7D1c7xvIU3aXOudH5HWV0H8WqvU/exec';
+
+                    // Crear un formulario para enviar datos (método alternativo para evitar CORS)
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = scriptURL;
+                    form.target = 'hidden-iframe';
+
+                    // Añadir campos al formulario
+                    const addField = (name, value) => {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = name;
+                        input.value = value;
+                        form.appendChild(input);
+                    };
+
+                    // Añadir cada campo
+                    addField('name', name);
+                    addField('email', email);
+                    addField('phone', phone);
+                    addField('service', service);
+                    addField('message', message);
+
+                    // Crear un iframe oculto para recibir la respuesta
+                    let iframe = document.getElementById('hidden-iframe');
+                    if (!iframe) {
+                        iframe = document.createElement('iframe');
+                        iframe.name = 'hidden-iframe';
+                        iframe.id = 'hidden-iframe';
+                        iframe.style.display = 'none';
+                        document.body.appendChild(iframe);
+                    }
+
+                    // Manejar respuesta del iframe
+                    iframe.onload = function () {
+                        // Restablecer botón
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+
+                        // Mostrar mensaje de éxito
+                        formStatus.innerHTML = `<div style="color: green; padding: 10px; background-color: #f0fff0; border-radius: 3px;">¡Gracias ${name}! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo lo antes posible.</div>`;
+                        formStatus.style.display = 'block';
+
+                        // Limpiar formulario
+                        contactForm.reset();
+                    };
+
+                    // En caso de error
+                    setTimeout(function () {
+                        if (submitBtn.disabled) {
+                            // Si después de 10 segundos no ha habido respuesta, asumimos un error
+                            submitBtn.textContent = originalBtnText;
+                            submitBtn.disabled = false;
+
+                            formStatus.innerHTML = '<div style="color: #721c24; padding: 10px; background-color: #f8d7da; border-radius: 3px;">Ha ocurrido un error al enviar el formulario. Por favor, inténtalo de nuevo más tarde.</div>';
+                            formStatus.style.display = 'block';
+                        }
+                    }, 10000);
+
+                    // Añadir formulario al DOM y enviarlo
+                    document.body.appendChild(form);
+                    form.submit();
+
+                    // Eliminar el formulario del DOM
+                    setTimeout(() => {
+                        document.body.removeChild(form);
+                    }, 100);
+                });
             }
-        }
-
-        if (mobileLanguageToggle) {
-            mobileLanguageToggle.addEventListener('click', () => {
-                const newLang = currentLang === 'es' ? 'en' : 'es';
-                changeLanguage(newLang);
-                updateMobileFlags(newLang);
-                updateFlags(newLang); // Update desktop flags too
-            });
-        }
-
-        // Modify the existing changeLanguage function to update both desktop and mobile flags
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.setAttribute('lang', lang);
-
-            // Update all translations
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.innerHTML = i18n[lang][key] || el.innerHTML;
-            });
-
-            // Update placeholders
-            const placeHolders = document.querySelectorAll('[data-i18n-placeholder-es]');
-            placeHolders.forEach(el => {
-                if (lang === 'es') {
-                    el.placeholder = el.getAttribute('data-i18n-placeholder-es') || el.placeholder;
-                } else {
-                    el.placeholder = el.getAttribute('data-i18n-placeholder-en') || el.placeholder;
-                }
-            });
-
-            // Update alt texts
-            const altImages = document.querySelectorAll('[data-i18n-alt-es]');
-            altImages.forEach(img => {
-                if (lang === 'es') {
-                    img.alt = img.getAttribute('data-i18n-alt-es') || img.alt;
-                } else {
-                    img.alt = img.getAttribute('data-i18n-alt-en') || img.alt;
-                }
-            });
-
-            // Update flags in both desktop and mobile views
-            updateFlags(lang);
-            updateMobileFlags(lang);
-        }
+        });
     </script>
 </body>
 

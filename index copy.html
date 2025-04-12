@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Universal Padel Academy - Una nueva era en la enseñanza del pádel dirigida por Claudio Gilardoni con la colaboración de Paulita Josemaría y Agustín Gutiérrez" />
+    <title>Universal Padel Academy</title>
+
+    <!-- CSS de terceros -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+
+    <style>
+        @keyframes gradientBg {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes logoGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.5));
+            }
+        }
+
+        .gradient-animate {
+            background: linear-gradient(-45deg, #1e40af, #3b82f6, #1d4ed8, #2563eb);
+            background-size: 400% 400%;
+            animation: gradientBg 15s ease infinite;
+        }
+
+        .clip-path-hero {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .perspective {
+            perspective: 1000px;
+        }
+
+        .rotate-hover {
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .rotate-hover:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .highlight-hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .highlight-hover:hover::after {
+            left: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        #preloader img {
+            animation: logoGlow 2s ease-in-out infinite;
+        }
+
+        .gradient-animate {
+            animation: gradientBg 15s ease infinite;
+        }
+
+        .appear-animation {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .appear-animation.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black">
+        <div class="relative flex flex-col items-center">
+            <div class="w-48 h-48 relative">
+                <!-- Logo -->
+                <img src="./logo-padel.png" alt="Universal Padel Logo" class="w-full h-full object-contain" width="192"
+                    height="192" data-i18n-alt-es="Universal Padel Logo" data-i18n-alt-en="Universal Padel Logo" />
+                <div class="absolute inset-0 -z-10 blur-xl bg-blue-500/20 rounded-full"></div>
+            </div>
+            <span class="text-white mt-4 tracking-[0.3em] text-sm" data-i18n="cargando">
+                CARGANDO
+            </span>
+            <div class="relative mt-8 w-32 h-32">
+                <svg class="animate-spin" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgb(252,203,137)" stroke-width="2"></circle>
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#df973e" stroke-width="2" stroke-linecap="round"
+                        stroke-dasharray="70 283" transform="rotate(-90 50 50)"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-40 transition-all duration-500">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <a href="#" class="flex items-center">
+                    <img src="./logo-padel.png" alt="Universal Padel Logo" class="h-30 md:h-24" width="96" height="96"
+                        data-i18n-alt-es="Universal Padel Logo" data-i18n-alt-en="Universal Padel Logo" />
+                </a>
+                <button id="menuBtn" class="md:hidden z-50 relative w-10 h-10 focus:outline-none">
+                    <div class="absolute w-6 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
+                        <span class="absolute h-0.5 w-6 bg-white transform transition duration-300 rotate-0"></span>
+                        <span
+                            class="absolute h-0.5 w-6 bg-white transform transition duration-300 -translate-y-2"></span>
+                        <span
+                            class="absolute h-0.5 w-6 bg-white transform transition duration-300 translate-y-2"></span>
+                    </div>
+                </button>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about"
+                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
+                        data-i18n="navSobreNosotros">
+                        Sobre Nosotros
+                    </a>
+                    <a href="#services"
+                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
+                        data-i18n="navServicios">
+                        Servicios
+                    </a>
+                    <a href="#features"
+                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
+                        data-i18n="navCaracteristicas">
+                        Características
+                    </a>
+                    <a href="#location"
+                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
+                        data-i18n="navUbicacion">
+                        Ubicación
+                    </a>
+                    <a href="#contact"
+                        class="text-lg highlight-hover py-2 px-4 rounded-lg transition-colors hover:text-blue-400"
+                        data-i18n="navContacto">
+                        Contacto
+                    </a>
+                    <a href="https://www.instagram.com/universalpadel_academy" target="_blank" rel="noopener noreferrer"
+                        class="flex items-center space-x-2 bg-blue-600/20 px-6 py-3 rounded-full hover:bg-blue-600/30 transition-all">
+                        <span class="text-lg" data-i18n="navSeguinos">
+                            Seguinos
+                        </span>
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07
+                   3.252.148 4.771 1.691 4.919 4.919.058 1.265.069
+                   1.645.069 4.849 0 3.205-.012 3.584-.069 4.849
+                   -.149 3.225-1.664 4.771-4.919 4.919-1.266.058
+                   -1.644.07-4.85.07-3.204 0-3.584-.012-4.849
+                   -.07-3.26-.149-4.771-1.699-4.919-4.92
+                   -.058-1.265-.07-1.644-.07-4.849 0-3.204
+                   .013-3.583.07-4.849.149-3.227 1.664-4.771
+                   4.919-4.919 1.266-.057 1.645-.069 4.849
+                   -.069zm0-2.163c-3.259 0-3.667.014-4.947
+                   .072-4.358.2-6.78 2.618-6.98 6.98-.059
+                   1.281-.073 1.689-.073 4.948 0 3.259
+                   .014 3.668.072 4.948.2 4.358 2.618
+                   6.78 6.98 6.98 1.281.058 1.689.072
+                   4.948.072 3.259 0 3.668-.014 4.948
+                   -.072 4.354-.2 6.782-2.618 6.98
+                   -6.98.059-1.28.073-1.689.073-4.948
+                   0-3.259-.014-3.667-.072-4.947-.196
+                   -4.354-2.617-6.78-6.979-6.98
+                   -1.281-.059-1.69-.073-4.949
+                   -.073zm0 5.838a6.162 6.162 0
+                   100 12.324 6.162 6.162 0 000-12.324
+                   zM12 16a4 4 0 110-8 4 4 0
+                   010 8zm6.406-11.845a1.44 1.44 0
+                   100 2.881 1.44 1.44 0 000
+                   -2.881z"></path>
+                        </svg>
+                    </a>
+                    <!-- Ícono para cambiar idioma -->
+                    <button id="languageToggle"
+                        class="p-2 text-sm border border-white/20 rounded hover:bg-white/20 transition-all flex items-center gap-2"
+                        title="Cambiar idioma">
+                        <span id="currentFlag">🇪🇸</span>
+                        <span class="text-xs opacity-50">→</span>
+                        <span id="nextFlag" class="opacity-50">🇬🇧</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-y-0 left-0 w-full bg-black/95 nav-blur z-30 md:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#about" class="text-3xl font-bold hover:text-blue-500 transition-colors"
+                data-i18n="mobileSobreNosotros">
+                Sobre Nosotros
+            </a>
+            <a href="#services" class="text-3xl font-bold hover:text-blue-500 transition-colors"
+                data-i18n="mobileServicios">
+                Servicios
+            </a>
+            <a href="#features" class="text-3xl font-bold hover:text-blue-500 transition-colors"
+                data-i18n="mobileCaracteristicas">
+                Características
+            </a>
+            <a href="#location" class="text-3xl font-bold hover:text-blue-500 transition-colors"
+                data-i18n="mobileUbicacion">
+                Ubicación
+            </a>
+            <a href="#contact" class="text-3xl font-bold hover:text-blue-500 transition-colors"
+                data-i18n="mobileContacto">
+                Contacto
+            </a>
+            <a href="https://www.instagram.com/universalpadel_academy"
+                class="text-3xl font-bold hover:text-blue-500 transition-colors" data-i18n="mobileInstagram">
+                Instagram
+            </a>
+
+            <!-- Language Toggle for Mobile -->
+            <button id="mobileLanguageToggle"
+                class="mt-8 p-4 text-xl border border-white/20 rounded-xl hover:bg-white/20 transition-all flex items-center gap-3"
+                title="Cambiar idioma">
+                <span id="mobileCurrentFlag">🇪🇸</span>
+                <span class="text-sm opacity-50">→</span>
+                <span id="mobileNextFlag" class="opacity-50">🇬🇧</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen bg-black overflow-hidden clip-path-hero">
+        <div class="absolute inset-0">
+            <img src="./hero.jpg" alt="Padel Court"
+                class="w-full h-full object-cover scale-105 filter brightness-75 contrast-125" width="1920"
+                height="1080" data-i18n-alt-es="Cancha de Padel" data-i18n-alt-en="Padel Court" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-600/20 rounded-full filter blur-3xl"></div>
+            <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-400/20 rounded-full filter blur-3xl"></div>
+        </div>
+
+        <div class="relative z-20 container mx-auto px-6 h-screen flex flex-col justify-center">
+            <div class="max-w-5xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8">
+                    <span class="block bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-400"
+                        data-i18n="heroLinea1">
+                        Una nueva era en la
+                    </span>
+                    <span class="block mt-2 text-white" data-i18n="heroLinea2">
+                        enseñanza del pádel
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
+                    data-i18n="heroParrafo">
+                    Fusionamos tecnología avanzada y metodología exclusiva para
+                    crear la próxima generación de jugadores de pádel
+                </p>
+
+                <!-- Colaboradores destacados -->
+                <div class="mb-12 flex flex-col items-center">
+                    <span class="text-blue-400 text-sm uppercase tracking-wider mb-4">Con la colaboración especial
+                        de</span>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="bg-blue-900/30 backdrop-blur-sm rounded-lg px-6 py-4 border border-blue-500/20">
+                            <p class="font-bold text-xl">Paulita Josemaría</p>
+                            <p class="text-blue-300">Número 1 del ranking mundial</p>
+                        </div>
+                        <div class="bg-blue-900/30 backdrop-blur-sm rounded-lg px-6 py-4 border border-blue-500/20">
+                            <p class="font-bold text-xl">Agustín Gutiérrez</p>
+                            <p class="text-blue-300">Número 30 del ranking mundial</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banner de construcción -->
+                <div class="inline-block group">
+                    <div
+                        class="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600/10 via-blue-400/10 to-blue-600/10 backdrop-blur-sm border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
+                        <div class="flex items-center justify-center space-x-4">
+                            <div class="relative">
+                                <span
+                                    class="absolute inset-0 w-full h-full bg-blue-500/30 rounded-full animate-ping"></span>
+                                <span class="relative block w-3 h-3 bg-blue-500 rounded-full"></span>
+                            </div>
+                            <div class="flex flex-col items-start">
+                                <span class="text-blue-300 text-sm font-medium uppercase tracking-wider"
+                                    data-i18n="proximamente">
+                                    Próximamente
+                                </span>
+                                <span class="text-white/80 text-xs" data-i18n="sitioConstruccion">
+                                    Sitio en construcción
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón "Ver más" -->
+        <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})"
+            class="absolute bottom-14 left-1/2 transform -translate-x-1/2 group flex flex-col items-center gap-3 hover:opacity-100 transition-all duration-300 opacity-80"
+            data-i18n="heroVerMas">
+            <div class="relative w-8 h-8">
+                <span
+                    class="absolute inset-0 w-full h-full bg-blue-500/20 rounded-full group-hover:bg-blue-500/30 transition-colors"></span>
+                <svg class="w-8 h-8 text-blue-400 animate-bounce group-hover:text-blue-300 transition-colors"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden bg-black">
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-blue-600/10 rounded-full filter blur-3xl"></div>
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 relative z-10 appear-animation">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-white"
+                    data-i18n="aboutTitulo">
+                    Sobre Nosotros
+                </span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="appear-animation">
+                    <div
+                        class="bg-gradient-to-br from-blue-900/40 to-blue-800/20 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20">
+                        <p class="text-lg mb-6 text-gray-300 leading-relaxed">
+                            Universal Padel Academy es una marca de nueva creación que tiene una
+                            visión del pádel de 360 grados. Está formada por un equipo
+                            multidisciplinar con una amplia experiencia en el sector del pádel, y
+                            dirigida por Claudio Gilardoni.
+                        </p>
+                        <p class="text-lg mb-6 text-gray-300 leading-relaxed">
+                            Trabajamos desde una perspectiva global que fusiona la táctica, técnica,
+                            preparación física, entrenamiento mental y nutrición. A través de
+                            nuestra metodología pretendemos motivar, inspirar y ayudar a los
+                            jugadores profesionales, entusiastas y jóvenes talentos a alcanzar su
+                            mayor potencial y desarrollo personal.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            La pasión y experiencia de nuestro equipo técnico en el pádel, se
+                            extiende más allá de la pista. Contribuimos día a día al crecimiento y
+                            la expansión del pádel, gracias a nuestros programas de formación para
+                            coaches y el soporte e impulso que ofrecemos a clubs de pádel.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="appear-animation delay-200">
+                    <div
+                        class="relative overflow-hidden rounded-2xl border border-blue-500/20 shadow-xl shadow-blue-900/20">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
+                        <img src="./about-image.jpg" alt="Entrenamiento de Pádel" class="w-full h-auto object-cover" />
+                        <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+                            <h3 class="text-xl font-bold mb-2">Nuestros Valores</h3>
+                            <p class="text-blue-200">Trabajo en equipo, disciplina, respeto, perseverancia, resiliencia,
+                                crecimiento personal y excelencia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coach Principal Section -->
+            <div class="mt-24 appear-animation">
+                <h3 class="text-3xl font-bold text-center mb-12 text-blue-300">Nuestro General Manager</h3>
+                <div
+                    class="bg-gradient-to-br from-blue-900/30 to-blue-800/10 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20 max-w-4xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="w-40 h-40 relative flex-shrink-0">
+                            <div
+                                class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 animate-pulse opacity-70">
+                            </div>
+                            <img src="./coach.jpg" alt="Claudio Gilardoni"
+                                class="w-full h-full object-cover rounded-full relative z-10 border-2 border-blue-400/50" />
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-3 text-white">Claudio Gilardoni</h4>
+                            <p class="text-lg mb-4 text-gray-300 leading-relaxed">
+                                Un talento del front row del pádel con más de 23 años de experiencia
+                                profesional. Sus comienzos fueron en la cuna del pádel, su Argentina
+                                natal, allí se formó y se inició como coach de jugadores.
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                Ha entrenado a jugadores como Sanyo Gutiérrez, Agustín
+                                Gutiérrez, Josete Rico, Javier Rico y Paula Josemaría entre otros.
+                                También ha trabajado en equipo con binomios entre los que se encuentran
+                                Fernando Belasteguín, Agustín Tapia, Juan Martín Díaz, Franco Stupazuck
+                                y Ari Sánchez.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative overflow-hidden bg-gradient-to-b from-black to-blue-950">
+        <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-600/10 rounded-full filter blur-3xl"></div>
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 appear-animation">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-white"
+                    data-i18n="servicesTitulo">
+                    Nuestros Servicios
+                </span>
+            </h2>
+
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto text-center mb-16 appear-animation">
+                En nuestra academia ofrecemos un servicio integral adaptado a las
+                necesidades de todos los jugadores de pádel independientemente de su nivel.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="appear-animation perspective">
+                    <div class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <div class="p-8 relative z-10 flex flex-col h-full">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Escuela de Pádel Amateur</h3>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Clases y entrenamiento para todos los niveles, desde principiantes hasta jugadores
+                                avanzados que buscan mejorar su técnica.
+                            </p>
+                            <a href="#"
+                                class="text-blue-300 flex items-center gap-2 hover:text-blue-200 transition-colors mt-auto inline-block">
+                                <span>Saber más</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="appear-animation perspective delay-100">
+                    <div class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <div class="p-8 relative z-10 flex flex-col h-full">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Academia de Competición de Menores</h3>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Entrenamiento especializado para jóvenes talentos que buscan desarrollar su potencial y
+                                preparación para competiciones.
+                            </p>
+                            <a href="#"
+                                class="text-blue-300 flex items-center gap-2 hover:text-blue-200 transition-colors mt-auto inline-block">
+                                <span>Saber más</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="appear-animation perspective delay-200">
+                    <div class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <div class="p-8 relative z-10 flex flex-col h-full">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Academia Profesional</h3>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Programa elite para jugadores profesionales que compiten al más alto nivel, con
+                                entrenamiento personalizado y apoyo completo.
+                            </p>
+                            <a href="#"
+                                class="text-blue-300 flex items-center gap-2 hover:text-blue-200 transition-colors mt-auto inline-block">
+                                <span>Saber más</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="appear-animation perspective delay-300">
+                    <div class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <div class="p-8 relative z-10 flex flex-col h-full">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Stages</h3>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Experiencias intensivas desde 3 días hasta un mes para jugadores que deseen visitar
+                                nuestra sede principal en España.
+                            </p>
+                            <a href="#"
+                                class="text-blue-300 flex items-center gap-2 hover:text-blue-200 transition-colors mt-auto inline-block">
+                                <span>Saber más</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div class="appear-animation perspective delay-400">
+                    <div class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <div class="p-8 relative z-10 flex flex-col h-full">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Formación de Coaches</h3>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Programas intensivos para adquirir o perfeccionar habilidades de entrenamiento y
+                                mantenerse actualizados con los últimos avances.
+                            </p>
+                            <a href="#"
+                                class="text-blue-300 flex items-center gap-2 hover:text-blue-200 transition-colors mt-auto inline-block">
+                                <span>Saber más</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div class="appear-animation perspective delay-500">
+                    <div class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <div class="p-8 relative z-10 flex flex-col h-full">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Organización de Eventos</h3>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Creación y gestión de eventos deportivos de pádel a medida para clubes, empresas o
+                                grupos.
+                            </p>
+                            <a href="#"
+                                class="text-blue-300 flex items-center gap-2 hover:text-blue-200 transition-colors mt-auto inline-block">
+                                <span>Saber más</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personaliza tu visita -->
+            <div class="mt-24 appear-animation">
+                <h3 class="text-3xl font-bold text-center mb-8 text-blue-300">Personaliza tu visita</h3>
+                <p class="text-xl text-center text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Para darle un plus a tu experiencia, te ofrecemos distintos servicios extras que puedes contratar
+                    con nosotros. Gestionaremos todo lo que necesites para tu visita.
+                </p>
+
+                <div
+                    class="bg-gradient-to-br from-blue-900/30 to-blue-800/10 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20 max-w-5xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Alojamiento y desayuno</h4>
+                                <p class="text-gray-300 text-sm">Opciones de hospedaje seleccionadas cerca de nuestras
+                                    instalaciones.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Clase extra individual</h4>
+                                <p class="text-gray-300 text-sm">Sesiones personalizadas de entrenamiento uno a uno.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Transfer aeropuerto/hotel</h4>
+                                <p class="text-gray-300 text-sm">Servicio de transporte para tu comodidad.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Transfer hotel/academia</h4>
+                                <p class="text-gray-300 text-sm">Traslados diarios entre tu alojamiento y nuestras
+                                    instalaciones.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Actividades free time</h4>
+                                <p class="text-gray-300 text-sm">Parques temáticos, acuáticos, naturales, safaris y
+                                    mucho más.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Tours turísticos</h4>
+                                <p class="text-gray-300 text-sm">Visitas guiadas a los principales atractivos de la
+                                    Costa Blanca.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-32 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 appear-animation" data-i18n="featuresTitulo">
+                Experiencia Premium
+            </h2>
+            <div id="features-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="feature-item appear-animation">
+                    <div class="relative overflow-hidden rounded-2xl">
+                        <img src="./1.jpg" alt="Equipamiento Profesional" class="w-full h-80 object-cover"
+                            data-i18n-alt-es="Equipamiento Profesional" data-i18n-alt-en="Professional Equipment" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-2xl font-bold mb-2" data-i18n="feature1Titulo">
+                                Equipamiento Elite
+                            </h3>
+                            <p class="text-gray-300" data-i18n="feature1Desc">
+                                Tecnología de última generación para maximizar tu rendimiento
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item appear-animation delay-100">
+                    <div class="relative overflow-hidden rounded-2xl">
+                        <img src="./2.jpg" alt="Instalaciones Premium" class="w-full h-80 object-cover"
+                            data-i18n-alt-es="Instalaciones Premium" data-i18n-alt-en="Premium Facilities" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-2xl font-bold mb-2" data-i18n="feature2Titulo">
+                                Instalaciones Premium
+                            </h3>
+                            <p class="text-gray-300" data-i18n="feature2Desc">
+                                Canchas profesionales diseñadas para la excelencia
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item appear-animation delay-200">
+                    <div class="relative overflow-hidden rounded-2xl">
+                        <img src="./3.jpg" alt="Entrenamiento Personalizado" class="w-full h-80 object-cover"
+                            data-i18n-alt-es="Entrenamiento Personalizado" data-i18n-alt-en="Personalized Training" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-2xl font-bold mb-2" data-i18n="feature3Titulo">
+                                Entrenamiento Personalizado
+                            </h3>
+                            <p class="text-gray-300" data-i18n="feature3Desc">
+                                Metodología exclusiva adaptada a tu nivel
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instalaciones Information -->
+            <div class="mt-24 appear-animation">
+                <h3 class="text-3xl font-bold text-center mb-12 text-blue-300">Nuestras Instalaciones</h3>
+                <div
+                    class="bg-gradient-to-br from-blue-900/30 to-blue-800/10 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20">
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <div class="lg:w-1/2">
+                            <img src="./instalaciones.jpg" alt="Instalaciones de Universal Padel Academy"
+                                class="w-full h-auto rounded-xl object-cover shadow-xl" />
+                        </div>
+                        <div class="lg:w-1/2">
+                            <p class="text-lg mb-6 text-gray-300 leading-relaxed">
+                                El club cuenta con 7 pistas de pádel totalmente equipadas. 3 pistas
+                                panorámicas con suelo Mondo Premier Padel y otras 4 pistas con césped
+                                azul, todas ellas con vistas a la Gran Bahía de Costa Blanca.
+                            </p>
+                            <p class="text-lg mb-6 text-gray-300 leading-relaxed">
+                                También dispone de gimnasio, spa con circuito de aguas, vestuario privado,
+                                bar & lounge, tienda especializada en equipación deportiva de pádel
+                                y parking gratuito.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-4 mt-8">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-200">7 pistas de pádel</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-200">Gimnasio</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-200">Spa con aguas</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-200">Bar & Lounge</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-200">Tienda especializada</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-200">Parking gratuito</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-24 relative overflow-hidden bg-gradient-to-b from-blue-950 to-black">
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/10 rounded-full filter blur-3xl"></div>
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 appear-animation">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-white"
+                    data-i18n="locationTitulo">
+                    Ubicación
+                </span>
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="appear-animation order-2 lg:order-1">
+                    <div
+                        class="bg-gradient-to-br from-blue-900/30 to-blue-800/10 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-300">Visítanos</h3>
+                        <div class="flex items-start gap-4 mb-6">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Dirección</h4>
+                                <p class="text-gray-300">Universal Padel Academy, Club Padelpoint Villaitana</p>
+                                <p class="text-gray-300">Avenida del Alcalde Eduardo Zaplana nº7</p>
+                                <p class="text-gray-300">03502 Benidorm (Alicante)</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-6 text-blue-300">Información de interés</h3>
+                        <p class="text-lg text-gray-300 mb-6">
+                            Nuestra academia está en un entorno y una ubicación privilegiada.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300">A menos de 3 km de Benidorm</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300">A 20 minutos en coche de Alicante</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300">A 50 km del aeropuerto de Alicante</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300">A 134 km del aeropuerto de Valencia</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300">Bien comunicado por la AP-7</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appear-animation order-1 lg:order-2">
+                    <div
+                        class="relative overflow-hidden rounded-2xl rotate-hover border border-blue-500/20 h-full shadow-xl">
+                        <!-- Aquí iría un mapa de Google Maps incrustado -->
+                        <div
+                            class="relative bg-blue-950/60 backdrop-blur-sm p-8 md:p-12 h-full flex flex-col items-center justify-center text-center rounded-2xl">
+                            <div class="w-24 h-24 flex items-center justify-center rounded-full bg-blue-600/30 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                </svg>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6 text-white">Escanea para ver la ubicación</h3>
+                            <p class="text-lg text-gray-300 mb-8">
+                                Utiliza el código QR para ver nuestra ubicación en Google Maps y obtener indicaciones.
+                            </p>
+                            <!-- QR placeholder -->
+                            <div class="w-48 h-48 bg-white p-4 rounded-xl relative">
+                                <div class="absolute inset-0 flex items-center justify-center text-black font-bold">
+                                    QR Code
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-32 overflow-hidden">
+        <div class="absolute inset-0 gradient-animate opacity-10"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full filter blur-3xl"></div>
+
+        <div class="container mx-auto px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 appear-animation" data-i18n="contactTitulo">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-white">
+                        Únete a la Revolución
+                    </span>
+                </h2>
+
+                <!-- Two column layout for contact section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="appear-animation">
+                        <div
+                            class="bg-gradient-to-br from-blue-900/30 to-blue-800/10 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20 h-full">
+                            <h3 class="text-2xl font-bold mb-6 text-blue-300">Contacta con nosotros</h3>
+
+                            <div class="flex items-start gap-4 mb-6">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Email</h4>
+                                    <a href="mailto:info@universalpadelacademy.com"
+                                        class="text-blue-300 hover:text-blue-200 transition-colors">info@universalpadelacademy.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 mb-6">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Web</h4>
+                                    <a href="https://www.universalpadelacademy.com" target="_blank"
+                                        class="text-blue-300 hover:text-blue-200 transition-colors">www.universalpadelacademy.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 mb-10">
+                                <div
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600/30 flex-shrink-0 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07
+                                               3.252.148 4.771 1.691 4.919 4.919.058 1.265.069
+                                               1.645.069 4.849 0 3.205-.012 3.584-.069 4.849
+                                               -.149 3.225-1.664 4.771-4.919 4.919-1.266.058
+                                               -1.644.07-4.85.07-3.204 0-3.584-.012-4.849
+                                               -.07-3.26-.149-4.771-1.699-4.919-4.92
+                                               -.058-1.265-.07-1.644-.07-4.849 0-3.204
+                                               .013-3.583.07-4.849.149-3.227 1.664-4.771
+                                               4.919-4.919 1.266-.057 1.645-.069 4.849-.069z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Instagram</h4>
+                                    <a href="https://www.instagram.com/universalpadel_academy" target="_blank"
+                                        class="text-blue-300 hover:text-blue-200 transition-colors">@universalpadel_academy</a>
+                                </div>
+                            </div>
+
+                            <!-- CTA button for scheduling a visit -->
+                            <a href="#"
+                                class="block w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-4 px-6 rounded-xl text-center transition-all shadow-lg shadow-blue-900/30 hover:shadow-blue-900/50">
+                                <span class="flex items-center justify-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span>Programa una visita</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="appear-animation delay-100">
+                        <div class="text-center mb-8">
+                            <p class="text-xl text-gray-300 mb-6 leading-relaxed" data-i18n="contactParrafo">
+                                Sé el primero en conocer nuestra fecha de apertura y recibe acceso exclusivo
+                                a nuestros programas de entrenamiento
+                            </p>
+                        </div>
+
+                        <form class="space-y-8" id="contactForm">
+                            <div class="relative group">
+                                <input type="text" id="nameInput" name="nameInput" required
+                                    placeholder="Tu nombre completo" class="w-full bg-gray-800 border border-blue-500/30 rounded-xl 
+                                           px-6 py-4 text-white placeholder-gray-300
+                                           focus:border-blue-400 focus:bg-gray-700 
+                                           transition-all duration-300 outline-none text-lg"
+                                    data-i18n-placeholder-es="Tu nombre completo"
+                                    data-i18n-placeholder-en="Your full name" />
+                            </div>
+
+                            <div class="relative group">
+                                <input type="email" id="emailInput" name="emailInput" required
+                                    placeholder="Tu correo electrónico" class="w-full bg-gray-800 border border-blue-500/30 rounded-xl 
+                                           px-6 py-4 text-white placeholder-gray-300
+                                           focus:border-blue-400 focus:bg-gray-700 
+                                           transition-all duration-300 outline-none text-lg"
+                                    data-i18n-placeholder-es="Tu correo electrónico"
+                                    data-i18n-placeholder-en="Your email address" />
+                            </div>
+
+                            <div class="relative group">
+                                <select id="interestInput" name="interestInput" required class="w-full bg-gray-800 border border-blue-500/30 rounded-xl 
+                                           px-6 py-4 text-white placeholder-gray-300
+                                           focus:border-blue-400 focus:bg-gray-700 
+                                           transition-all duration-300 outline-none text-lg">
+                                    <option value="" disabled selected>Estoy interesado en...</option>
+                                    <option value="amateur">Escuela de Pádel Amateur</option>
+                                    <option value="menores">Academia de Competición de Menores</option>
+                                    <option value="professional">Academia Profesional</option>
+                                    <option value="stages">Stages</option>
+                                    <option value="coach">Formación de Coaches</option>
+                                    <option value="events">Organización de Eventos</option>
+                                </select>
+                            </div>
+
+                            <div class="relative group">
+                                <textarea id="messageInput" name="messageInput" rows="4" required
+                                    placeholder="Tu mensaje" class="w-full bg-gray-800 border border-blue-500/30 rounded-xl 
+                                                 px-6 py-4 text-white placeholder-gray-300
+                                                 focus:border-blue-400 focus:bg-gray-700 
+                                                 transition-all duration-300 outline-none text-lg"
+                                    data-i18n-placeholder-es="Tu mensaje"
+                                    data-i18n-placeholder-en="Your message"></textarea>
+                            </div>
+
+                            <button type="submit" class="relative w-full group overflow-hidden"
+                                data-i18n="contactBoton">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 
+                                            opacity-50 group-hover:opacity-70 transition-opacity duration-500 rounded-xl">
+                                </div>
+                                <div class="absolute inset-0 transform translate-x-[-100%] group-hover:translate-x-[100%] 
+                                            bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                                            transition-transform duration-1000">
+                                </div>
+                                <div class="relative px-8 py-4 rounded-xl border border-blue-400/30 
+                                            bg-black/30 backdrop-blur-sm">
+                                    <div class="flex items-center justify-center gap-3">
+                                        <span class="text-lg font-semibold text-white">Enviar mensaje</span>
+                                        <svg class="w-6 h-6 text-blue-300 transform group-hover:translate-x-1 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <img src="./logo-padel.png" alt="Universal Padel Logo" class="h-20 w-auto mb-6" />
+                    <p class="text-gray-400 leading-relaxed">
+                        Una nueva era en la enseñanza del pádel con una visión 360 grados y un equipo multidisciplinar
+                        con amplia experiencia.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-white">Enlaces rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-blue-300 transition-colors">Sobre
+                                Nosotros</a></li>
+                        <li><a href="#services"
+                                class="text-gray-400 hover:text-blue-300 transition-colors">Servicios</a></li>
+                        <li><a href="#features"
+                                class="text-gray-400 hover:text-blue-300 transition-colors">Características</a></li>
+                        <li><a href="#location"
+                                class="text-gray-400 hover:text-blue-300 transition-colors">Ubicación</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-300 transition-colors">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-white">Servicios</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-blue-300 transition-colors">Escuela Amateur</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-300 transition-colors">Academia Menores</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-300 transition-colors">Academia
+                                Profesional</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-300 transition-colors">Stages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-300 transition-colors">Formación Coach</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-white">Contáctanos</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400 mt-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span class="text-gray-400">info@universalpadelacademy.com</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400 mt-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            <span class="text-gray-400">+34 XXX XXX XXX</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400 mt-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span class="text-gray-400">Avenida del Alcalde Eduardo Zaplana nº7<br>03502 Benidorm
+                                (Alicante)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0" data-i18n="footerDerechos">
+                    &copy; 2025 Universal Padel Academy - Todos los derechos reservados
+                </p>
+                <!-- Desarrollado por @Codeo.Ar con su logo -->
+                <div class="flex items-center space-x-2 mt-6 md:mt-4">
+                    <p class="text-gray-500" data-i18n="footerDesarrolladoPor">Desarrollado por</p>
+                    <a href="https://www.instagram.com/codeo.ar" target="_blank" rel="noopener noreferrer"
+                        class="flex items-center hover:text-white transition-colors" data-i18n="footerCodeo">
+                        <img src="icon.png" alt="Codeo Logo" class="h-6 w-6 mr-1" />
+                        <span class="text-gray-500">@Codeo.Ar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        // Registro de plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Preloader A
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        startAnimations();
+                    },
+                });
+            }
+        });
+
+        // Iniciar animaciones de GSAP
+        function startAnimations() {
+            // Aparecer animaciones
+            const appearElements = document.querySelectorAll('.appear-animation');
+            appearElements.forEach((element) => {
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: 'top 85%',
+                    onEnter: () => element.classList.add('active'),
+                    once: true
+                });
+            });
+        }
+
+        // Scroll suave en anclas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Cerrar menú móvil si está abierto
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Efecto en el header al hacer scroll
+        const header = document.querySelector('nav');
+        let lastScroll = 0;
+        let scrollTimeout;
+
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll <= 0) {
+                    header?.classList.remove('py-4', 'bg-black/80', 'nav-blur');
+                } else if (currentScroll > lastScroll) {
+                    header?.classList.add('py-4', 'bg-black/80', 'nav-blur');
+                }
+                lastScroll = currentScroll;
+                scrollTimeout = null;
+            }, 50);
+        });
+
+        // Menú móvil
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuBtnSpans = menuBtn?.querySelectorAll('span');
+        if (menuBtn && mobileMenu && menuBtnSpans) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                menuBtnSpans[0].classList.toggle('rotate-45');
+                menuBtnSpans[0].classList.toggle('translate-y-2');
+                menuBtnSpans[1].classList.toggle('opacity-0');
+                menuBtnSpans[2].classList.toggle('-rotate-45');
+                menuBtnSpans[2].classList.toggle('-translate-y-2');
+            });
+        }
+
+        // Formulario: enviar a Google Sheets
+        const contactForm = document.getElementById('contactForm');
+        const emailInput = document.getElementById('emailInput');
+
+        if (contactForm && emailInput) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const email = emailInput.value;
+                const button = e.target.querySelector('button');
+                const originalText = button.innerHTML;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Mensajes de estado (ES por defecto)
+                const MESSAGES = {
+                    es: {
+                        invalid: 'Email inválido',
+                        sending: 'Enviando...',
+                        success: '¡Registrado con éxito!',
+                        error: 'Error al enviar'
+                    },
+                    en: {
+                        invalid: 'Invalid email',
+                        sending: 'Sending...',
+                        success: 'Successfully registered!',
+                        error: 'Error sending'
+                    }
+                };
+
+                // Detectar idioma actual
+                const currentLang = document.documentElement.getAttribute('lang') || 'es';
+
+                if (!emailRegex.test(email)) {
+                    showFormMessage(button, 'error', MESSAGES[currentLang].invalid);
+                    return;
+                }
+
+                showFormMessage(button, 'loading', MESSAGES[currentLang].sending);
+
+                // TU URL DE GOOGLE APPS SCRIPT AQUI:
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbxCCFhGT-gNIBX7ErChiNW9fNJErp_HkJJWsK2q8ncq5M_Rq9H6dUw7sGpJT3vc9i7x/exec';
+
+                try {
+                    await fetch(scriptURL, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                    });
+                    showFormMessage(button, 'success', MESSAGES[currentLang].success);
+                    emailInput.value = '';
+                } catch (error) {
+                    showFormMessage(button, 'error', MESSAGES[currentLang].error);
+                }
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        function showFormMessage(button, type, message) {
+            const icons = {
+                error: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>`,
+                success: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 13l4 4L19 7"></path>
+                        </svg>`,
+                loading: `<svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <circle class="opacity-25" cx="12" cy="12" r="10"
+                                  stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 
+                                   0 5.373 0 12h4zm2 5.291A7.962 
+                                   7.962 0 014 12H0c0 3.042 1.135 
+                                   5.824 3 7.938l3-2.647z">
+                          </path>
+                        </svg>`
+            };
+            const colors = {
+                error: 'text-red-400',
+                success: 'text-green-400',
+                loading: 'text-white'
+            };
+            button.innerHTML = `
+                <span class="flex items-center justify-center gap-2 ${colors[type]}">
+                    ${icons[type]}
+                    <span>${message}</span>
+                </span>
+            `;
+        }
+    </script>
+    <script>
+        // Animación de aparición secuencial para features
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.feature-item');
+
+            gsap.to(items, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.3,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '#features-grid',
+                    start: 'top 80%',
+                },
+            });
+        });
+    </script>
+
+    <!-- SCRIPT DE CAMBIO DE IDIOMA -->
+    <script>
+        // Idioma por defecto
+        let currentLang = 'es';
+        document.documentElement.setAttribute('lang', currentLang);
+
+        // Objeto con traducciones
+        const i18n = {
+            es: {
+                navSobreNosotros: "Sobre Nosotros",
+                navServicios: "Servicios",
+                navCaracteristicas: "Características",
+                navUbicacion: "Ubicación",
+                navContacto: "Contacto",
+                navSeguinos: "Seguinos",
+                mobileSobreNosotros: "Sobre Nosotros",
+                mobileServicios: "Servicios",
+                mobileCaracteristicas: "Características",
+                mobileUbicacion: "Ubicación",
+                mobileContacto: "Contacto",
+                mobileInstagram: "Instagram",
+                cargando: "CARGANDO",
+                heroLinea1: "Una nueva era en la",
+                heroLinea2: "enseñanza del pádel",
+                heroParrafo: "Fusionamos tecnología avanzada y metodología exclusiva para crear la próxima generación de jugadores de pádel",
+                proximamente: "Próximamente",
+                sitioConstruccion: "Sitio en construcción",
+                heroVerMas: "", // Este botón solo tiene ícono, si deseas texto, colócalo aquí
+                aboutTitulo: "Sobre Nosotros",
+                servicesTitulo: "Nuestros Servicios",
+                featuresTitulo: "Experiencia Premium",
+                locationTitulo: "Ubicación",
+                feature1Titulo: "Equipamiento Elite",
+                feature1Desc: "Tecnología de última generación para maximizar tu rendimiento",
+                feature2Titulo: "Instalaciones Premium",
+                feature2Desc: "Canchas profesionales diseñadas para la excelencia",
+                feature3Titulo: "Entrenamiento Personalizado",
+                feature3Desc: "Metodología exclusiva adaptada a tu nivel",
+                contactTitulo: "Únete a la Revolución",
+                contactParrafo: "Sé el primero en conocer nuestra fecha de apertura y recibe acceso exclusivo a nuestros programas de entrenamiento",
+                contactBoton: "Enviar mensaje",
+                footerDerechos: "&copy; 2025 Universal Padel Academy - Todos los derechos reservados",
+                footerDesarrolladoPor: "Desarrollado por",
+                footerCodeo: "@Codeo.Ar"
+            },
+            en: {
+                navSobreNosotros: "About Us",
+                navServicios: "Services",
+                navCaracteristicas: "Features",
+                navUbicacion: "Location",
+                navContacto: "Contact",
+                navSeguinos: "Follow Us",
+                mobileSobreNosotros: "About Us",
+                mobileServicios: "Services",
+                mobileCaracteristicas: "Features",
+                mobileUbicacion: "Location",
+                mobileContacto: "Contact",
+                mobileInstagram: "Instagram",
+                cargando: "LOADING",
+                heroLinea1: "A new era in",
+                heroLinea2: "padel coaching",
+                heroParrafo: "We combine advanced technology with an exclusive methodology to create the next generation of padel players",
+                proximamente: "Coming Soon",
+                sitioConstruccion: "Website under construction",
+                heroVerMas: "",
+                aboutTitulo: "About Us",
+                servicesTitulo: "Our Services",
+                featuresTitulo: "Premium Experience",
+                locationTitulo: "Location",
+                feature1Titulo: "Elite Equipment",
+                feature1Desc: "State-of-the-art technology to maximize your performance",
+                feature2Titulo: "Premium Facilities",
+                feature2Desc: "Professional courts designed for excellence",
+                feature3Titulo: "Personalized Training",
+                feature3Desc: "Exclusive methodology tailored to your level",
+                contactTitulo: "Join the Revolution",
+                contactParrafo: "Be the first to know our opening date and get exclusive access to our training programs",
+                contactBoton: "Send Message",
+                footerDerechos: "&copy; 2025 Universal Padel Academy - All rights reserved",
+                footerDesarrolladoPor: "Developed by",
+                footerCodeo: "@Codeo.Ar"
+            }
+        };
+
+        // Función para cambiar idioma
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.setAttribute('lang', lang);
+
+            // Cambiar texto a cada elemento con data-i18n
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+
+            // Cambiar placeholders
+            const placeHolders = document.querySelectorAll('[data-i18n-placeholder-es]');
+            placeHolders.forEach(el => {
+                if (lang === 'es') {
+                    el.placeholder = el.getAttribute('data-i18n-placeholder-es') || el.placeholder;
+                } else {
+                    el.placeholder = el.getAttribute('data-i18n-placeholder-en') || el.placeholder;
+                }
+            });
+
+            // Cambiar alt de imágenes
+            const altImages = document.querySelectorAll('[data-i18n-alt-es]');
+            altImages.forEach(img => {
+                if (lang === 'es') {
+                    img.alt = img.getAttribute('data-i18n-alt-es') || img.alt;
+                } else {
+                    img.alt = img.getAttribute('data-i18n-alt-en') || img.alt;
+                }
+            });
+
+            // Update flags in both desktop and mobile views
+            updateFlags(lang);
+            updateMobileFlags(lang);
+        }
+
+        // Botón de cambio de idioma
+        const languageToggle = document.getElementById('languageToggle');
+        const currentFlag = document.getElementById('currentFlag');
+        const nextFlag = document.getElementById('nextFlag');
+
+        function updateFlags(lang) {
+            if (lang === 'es') {
+                currentFlag.textContent = '🇪🇸';
+                nextFlag.textContent = '🇬🇧';
+            } else {
+                currentFlag.textContent = '🇬🇧';
+                nextFlag.textContent = '🇪🇸';
+            }
+        }
+
+        if (languageToggle) {
+            languageToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                changeLanguage(newLang);
+            });
+        }
+
+        // Mobile language toggle functionality
+        const mobileLanguageToggle = document.getElementById('mobileLanguageToggle');
+        const mobileCurrentFlag = document.getElementById('mobileCurrentFlag');
+        const mobileNextFlag = document.getElementById('mobileNextFlag');
+
+        function updateMobileFlags(lang) {
+            if (lang === 'es') {
+                mobileCurrentFlag.textContent = '🇪🇸';
+                mobileNextFlag.textContent = '🇬🇧';
+            } else {
+                mobileCurrentFlag.textContent = '🇬🇧';
+                mobileNextFlag.textContent = '🇪🇸';
+            }
+        }
+
+        if (mobileLanguageToggle) {
+            mobileLanguageToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                changeLanguage(newLang);
+            });
+        }
+
+        // Inicializar elementos de aparecer con JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            const appearElements = document.querySelectorAll('.appear-animation');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            appearElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>

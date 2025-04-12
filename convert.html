@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor HEIC a JPG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .dropzone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .dropzone:hover {
+            border-color: #0066ff;
+        }
+        #fileInput {
+            display: none;
+        }
+        button {
+            background-color: #0066ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #cccccc;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .image-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .image-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            background-color: #f5f5f5;
+        }
+        .image-info {
+            padding: 10px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversor HEIC a JPG</h1>
+    
+    <div class="dropzone" id="dropzone">
+        <p>Arrastra archivos HEIC aquí o haz clic para seleccionar</p>
+        <input type="file" id="fileInput" accept=".heic,image/heic" multiple>
+    </div>
+    
+    <div id="fileList"></div>
+    <div id="error" class="error"></div>
+    
+    <button id="convertBtn" disabled>Convertir a JPG</button>
+    <button id="downloadAllBtn" style="display: none;">Descargar Todas</button>
+    
+    <div id="gallery" class="gallery"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+            const error = document.getElementById('error');
+            const convertBtn = document.getElementById('convertBtn');
+            const downloadAllBtn = document.getElementById('downloadAllBtn');
+            const gallery = document.getElementById('gallery');
+            
+            let selectedFiles = [];
+            let convertedFiles = [];
+            
+            // Evento para abrir el selector de archivos al hacer clic en la zona
+            dropzone.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Prevenir comportamiento por defecto del navegador (abrir archivos)
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.style.borderColor = '#0066ff';
+            });
+            
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.style.borderColor = '#ccc';
+            });
+            
+            // Manejar archivos arrastrados
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.style.borderColor = '#ccc';
+                
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+            
+            // Manejar archivos seleccionados con el input
+            fileInput.addEventListener('change', () => {
+                handleFiles(fileInput.files);
+            });
+            
+            // Función para manejar los archivos seleccionados
+            function handleFiles(files) {
+                selectedFiles = [];
+                error.textContent = '';
+                
+                const heicFiles = Array.from(files).filter(file => 
+                    file.name.toLowerCase().endsWith('.heic') || 
+                    file.type === 'image/heic'
+                );
+                
+                if (heicFiles.length === 0 && files.length > 0) {
+                    error.textContent = 'Por favor selecciona archivos con formato HEIC';
+                    convertBtn.disabled = true;
+                    fileList.innerHTML = '';
+                    return;
+                }
+                
+                selectedFiles = heicFiles;
+                
+                // Mostrar la lista de archivos
+                if (selectedFiles.length > 0) {
+                    fileList.innerHTML = `
+                        <p>${selectedFiles.length} archivo(s) seleccionado(s):</p>
+                        <ul>${selectedFiles.map(file => `<li>${file.name} (${Math.round(file.size / 1024)} KB)</li>`).join('')}</ul>
+                    `;
+                    convertBtn.disabled = false;
+                } else {
+                    fileList.innerHTML = '';
+                    convertBtn.disabled = true;
+                }
+            }
+            
+            // Función para convertir archivos HEIC a JPG
+            convertBtn.addEventListener('click', async () => {
+                if (selectedFiles.length === 0) return;
+                
+                gallery.innerHTML = '';
+                convertedFiles = [];
+                error.textContent = '';
+                convertBtn.disabled = true;
+                convertBtn.textContent = 'Convirtiendo...';
+                downloadAllBtn.style.display = 'none';
+                
+                try {
+                    for (const file of selectedFiles) {
+                        try {
+                            // Convertir HEIC a JPEG
+                            const jpgBlob = await heic2any({
+                                blob: file,
+                                toType: 'image/jpeg',
+                                quality: 0.8
+                            });
+                            
+                            // Crear URL para la imagen
+                            const jpgUrl = URL.createObjectURL(jpgBlob);
+                            const fileName = file.name.replace(/\.heic$/i, '.jpg');
+                            
+                            // Guardar información del archivo convertido
+                            const convertedFile = {
+                                originalName: file.name,
+                                convertedName: fileName,
+                                url: jpgUrl,
+                                blob: jpgBlob
+                            };
+                            
+                            convertedFiles.push(convertedFile);
+                            
+                            // Crear card para la imagen en la galería
+                            const card = document.createElement('div');
+                            card.className = 'image-card';
+                            
+                            card.innerHTML = `
+                                <img src="${jpgUrl}" alt="${fileName}">
+                                <div class="image-info">
+                                    <p>${fileName}</p>
+                                    <button class="download-btn">Descargar</button>
+                                </div>
+                            `;
+                            
+                            // Agregar evento para descargar
+                            card.querySelector('.download-btn').addEventListener('click', () => {
+                                downloadFile(convertedFile);
+                            });
+                            
+                            gallery.appendChild(card);
+                            
+                        } catch (fileError) {
+                            console.error(`Error al convertir ${file.name}:`, fileError);
+                            error.textContent = `Error al convertir ${file.name}. Por favor intenta con otro archivo.`;
+                        }
+                    }
+                    
+                    if (convertedFiles.length > 0) {
+                        downloadAllBtn.style.display = 'inline-block';
+                    }
+                    
+                } catch (err) {
+                    console.error('Error al cargar la librería de conversión:', err);
+                    error.textContent = 'No se pudo cargar la librería de conversión. Por favor intenta de nuevo más tarde.';
+                } finally {
+                    convertBtn.disabled = false;
+                    convertBtn.textContent = 'Convertir a JPG';
+                }
+            });
+            
+            // Función para descargar un archivo
+            function downloadFile(file) {
+                const a = document.createElement('a');
+                a.href = file.url;
+                a.download = file.convertedName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+            
+            // Función para descargar todos los archivos
+            downloadAllBtn.addEventListener('click', () => {
+                convertedFiles.forEach(file => {
+                    downloadFile(file);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
