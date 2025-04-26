@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Competición Menores - Universal Padel Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Variables */
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+            --white: #ffffff;
+            --gray-light: #f8f8f8;
+            --gray: #888888;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--black);
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .btn-contact {
+            background-color: transparent;
+            color: var(--white);
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-contact:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        /* Hero section */
+        .service-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-color: var(--black);
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .service-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .service-hero-content {
+            position: relative;
+            text-align: center;
+            color: var(--white);
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .service-hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .service-hero-content p {
+            font-size: 18px;
+            margin: 30px 0;
+        }
+
+        /* Content section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Características específicas */
+        .service-features {
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            margin-bottom: 30px;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            color: var(--gray);
+        }
+
+        /* Quote section */
+        .quote-section {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .quote-text {
+            font-size: 24px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            color: var(--gold);
+            font-size: 50px;
+            line-height: 0;
+            position: absolute;
+        }
+
+        .quote-text::before {
+            left: -20px;
+            top: 15px;
+        }
+
+        .quote-text::after {
+            right: -20px;
+            bottom: 0;
+        }
+
+        /* Categorías section */
+        .categories-section {
+            background-color: var(--gray-light);
+            padding: 80px 0;
+        }
+
+        .categories-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .category-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.05);
+        }
+
+        .category-age {
+            position: absolute;
+            top: 15px;
+            right: 0;
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 5px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .category-content {
+            padding: 25px;
+        }
+
+        .category-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .category-content h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .category-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .category-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-features li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .category-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 15px 30px;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-cta:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .footer-column p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .service-hero {
+                height: 50vh;
+            }
+
+            .service-hero-content h1 {
+                font-size: 36px;
+            }
+
+            .feature-item {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service-hero {
+                height: 40vh;
+            }
+
+            .service-hero-content h1 {
+                font-size: 30px;
+            }
+
+            .service-hero-content p {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .quote-text {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .service-hero-content h1 {
+                font-size: 24px;
+            }
+
+            .cta-content h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../images/logo-padel.png" alt="Universal Padel Academy" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#sobre-nosotros">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="../index.html#servicios"
+                                id="navbarDropdownServices" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Servicios</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownServices">
+                                <li><a class="dropdown-item" href="escuela-amateur.html">Escuela Amateur</a></li>
+                                <li><a class="dropdown-item active" href="academia-competicion-menores.html">Academia
+                                        Competición Menores</a></li>
+                                <li><a class="dropdown-item" href="academia-profesional.html">Academia Profesional</a>
+                                </li>
+                                <li><a class="dropdown-item" href="stages.html">Stages</a></li>
+                                <li><a class="dropdown-item" href="formacion-coach.html">Formación Coach</a></li>
+                                <li><a class="dropdown-item" href="eventos-deportivos.html">Organización de Eventos</a>
+                                </li>
+                                <li><a class="dropdown-item" href="metodologia-club.html">Nuestra metodología en tu
+                                        club</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#instalaciones">Instalaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#localizacion">Localización</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-contact ms-lg-2" href="../index.html#contacto">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <img src="../images/escuela.jpg" alt="Academia Competición Menores" class="service-hero-image">
+        <div class="service-hero-content">
+            <h1>Academia Competición Menores</h1>
+            <p>Formamos a los campeones del mañana con metodología de élite</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Desarrollo de Jóvenes Talentos</h2>
+                <p>Entrenamiento especializado para jóvenes que quieren alcanzar su máximo potencial</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="lead text-center mb-5">Cada entrenamiento es único, adaptado a las necesidades y objetivos
+                        de cada jugador. Proporcionamos a los alumnos una experiencia única e inigualable. "Buscando la
+                        excelencia, más allá de sus límites."</p>
+                </div>
+            </div>
+
+            <div class="row service-features">
+                <div class="col-md-4">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Entrenamientos Regulares</h3>
+                        <p>Programas de entrenamiento de lunes a viernes, diseñados para desarrollar todas las facetas
+                            del juego.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3>Preparación Física</h3>
+                        <p>Programa específico de preparación física para mejorar la condición y prevenir lesiones en
+                            jóvenes deportistas.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Competición</h3>
+                        <p>Preparación técnica, táctica y mental para torneos y competiciones oficiales de todas las
+                            categorías.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-content">
+            <p class="quote-text">Buscando la excelencia, más allá de sus límites.</p>
+        </div>
+    </section>
+
+    <!-- Categorías Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras Categorías</h2>
+                <p>Programas adaptados a cada etapa de desarrollo</p>
+            </div>
+
+            <div class="categories-container">
+                <!-- Categoría Alevín -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../images/alevin.jpg" alt="Categoría Alevín">
+                        <div class="category-age">11-12 años</div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Alevín</h3>
+                        <p>Programa adaptado para los más jóvenes, donde se construyen las bases técnicas y se
+                            introducen conceptos tácticos básicos.</p>
+                        <ul class="category-features">
+                            <li>Desarrollo técnico fundamental</li>
+                            <li>Introducción a conceptos tácticos</li>
+                            <li>Dinámicas de grupo y juegos</li>
+                            <li>Primeros torneos y competiciones</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Categoría Infantil -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../images/infantil.jpg" alt="Categoría Infantil">
+                        <div class="category-age">13-14 años</div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Infantil</h3>
+                        <p>Etapa crucial donde se potencian las habilidades técnicas y se profundiza en la táctica y
+                            estrategia de juego.</p>
+                        <ul class="category-features">
+                            <li>Perfeccionamiento técnico</li>
+                            <li>Desarrollo táctico avanzado</li>
+                            <li>Preparación física específica</li>
+                            <li>Competición regular</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Categoría Cadete -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../images/cadete.jpg" alt="Categoría Cadete">
+                        <div class="category-age">15-16 años</div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Cadete</h3>
+                        <p>Fase de consolidación donde se integran aspectos técnicos, tácticos, físicos y mentales para
+                            el alto rendimiento.</p>
+                        <ul class="category-features">
+                            <li>Técnica avanzada especializada</li>
+                            <li>Estrategia de competición</li>
+                            <li>Entrenamiento físico intensivo</li>
+                            <li>Gestión emocional en competición</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Categoría Junior -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../images/junior.jpg" alt="Categoría Junior">
+                        <div class="category-age">17-18 años</div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Junior</h3>
+                        <p>Preparación para el salto al profesionalismo, con entrenamientos personalizados de máxima
+                            exigencia.</p>
+                        <ul class="category-features">
+                            <li>Perfeccionamiento de estilo propio</li>
+                            <li>Análisis de juego con tecnología</li>
+                            <li>Planificación de competiciones</li>
+                            <li>Transición a nivel profesional</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Tu hijo tiene talento para el pádel?</h2>
+                <p>Únete a nuestra Academia de Competición para Menores y ayúdale a alcanzar su máximo potencial en este
+                    apasionante deporte.</p>
+                <a href="../index.html#contacto" class="btn-cta">Solicita tu plaza</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Universal Padel Academy</h3>
+                    <p>Un espacio dedicado íntegramente al deporte que amamos. Pádel, pádel y más pádel.</p>
+                    <p>Este divertido deporte te atrapa y no conoce fronteras, se practica en los 5 continentes y es
+                        capaz de unir a distintas nacionalidades, culturas y lenguas haciéndolo universal.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="../index.html#sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="../index.html#servicios">Servicios</a></li>
+                        <li><a href="../index.html#instalaciones">Instalaciones</a></li>
+                        <li><a href="../index.html#localizacion">Localización</a></li>
+                        <li><a href="../index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Avenida del Alcalde Eduardo Zaplana nº7, 03502
+                            Benidorm (Alicante)</li>
+                        <li><i class="fas fa-envelope"></i> info@universalpadelacademy.com</li>
+                        <li><i class="fas fa-globe"></i> www.universalpadelacademy.com</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="https://instagram.com/universalpadel_academy" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/universalpadelacademy" class="social-link" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/universalpadel" class="social-link" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Universal Padel Academy. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

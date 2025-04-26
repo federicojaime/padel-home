@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra metodología en tu club - Universal Padel Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Variables */
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+            --white: #ffffff;
+            --gray-light: #f8f8f8;
+            --gray: #888888;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--black);
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .btn-contact {
+            background-color: transparent;
+            color: var(--white);
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-contact:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        /* Hero section */
+        .service-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-color: var(--black);
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .service-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .service-hero-content {
+            position: relative;
+            text-align: center;
+            color: var(--white);
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .service-hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .service-hero-content p {
+            font-size: 18px;
+            margin: 30px 0;
+        }
+
+        /* Content section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Características específicas */
+        .service-features {
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            margin-bottom: 30px;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            color: var(--gray);
+        }
+
+        /* Beneficios section */
+        .benefits-section {
+            background-color: var(--gray-light);
+            padding: 80px 0;
+        }
+
+        .benefits-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .benefit-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            height: 100px;
+            width: 100px;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-light);
+            border-radius: 50%;
+        }
+
+        .benefit-icon i {
+            font-size: 40px;
+            color: var(--gold);
+        }
+
+        .benefit-content {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .benefit-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .benefit-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .benefit-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Metodología sección */
+        .method-section {
+            padding: 80px 0;
+        }
+
+        .method-container {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+
+        .method-header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .method-header h3 {
+            font-size: 24px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .method-content {
+            padding: 30px;
+        }
+
+        .method-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .method-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .method-icon {
+            flex: 0 0 50px;
+            font-size: 24px;
+            color: var(--gold);
+            margin-right: 20px;
+        }
+
+        .method-text h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .method-text p {
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* Quote section */
+        .quote-section {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .quote-text {
+            font-size: 24px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            color: var(--gold);
+            font-size: 50px;
+            line-height: 0;
+            position: absolute;
+        }
+
+        .quote-text::before {
+            left: -20px;
+            top: 15px;
+        }
+
+        .quote-text::after {
+            right: -20px;
+            bottom: 0;
+        }
+
+        /* Implementation process */
+        .process-section {
+            background-color: var(--gray-light);
+            padding: 80px 0;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--gold);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .process-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gold);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .process-step h3 {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .process-step p {
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 15px 30px;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-cta:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .footer-column p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 80px 0;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .testimonial-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .testimonial-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--gold);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .testimonial-author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author-info p {
+            font-size: 14px;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .testimonial-quote {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 60px;
+            color: rgba(0, 0, 0, 0.05);
+            line-height: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .service-hero {
+                height: 50vh;
+            }
+
+            .service-hero-content h1 {
+                font-size: 36px;
+            }
+
+            .feature-item {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service-hero {
+                height: 40vh;
+            }
+
+            .service-hero-content h1 {
+                font-size: 30px;
+            }
+
+            .service-hero-content p {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .quote-text {
+                font-size: 20px;
+            }
+
+            .method-item {
+                flex-direction: column;
+            }
+
+            .method-icon {
+                margin-bottom: 10px;
+                margin-right: 0;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .service-hero-content h1 {
+                font-size: 24px;
+            }
+
+            .cta-content h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../images/logo-padel.png" alt="Universal Padel Academy" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#sobre-nosotros">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="../index.html#servicios"
+                                id="navbarDropdownServices" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Servicios</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownServices">
+                                <li><a class="dropdown-item" href="escuela-amateur.html">Escuela Amateur</a></li>
+                                <li><a class="dropdown-item" href="academia-competicion-menores.html">Academia
+                                        Competición Menores</a></li>
+                                <li><a class="dropdown-item" href="academia-profesional.html">Academia Profesional</a>
+                                </li>
+                                <li><a class="dropdown-item" href="stages.html">Stages</a></li>
+                                <li><a class="dropdown-item" href="formacion-coach.html">Formación Coach</a></li>
+                                <li><a class="dropdown-item" href="eventos-deportivos.html">Organización de Eventos</a>
+                                </li>
+                                <li><a class="dropdown-item active" href="metodologia-club.html">Nuestra metodología en
+                                        tu
+                                        club</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#instalaciones">Instalaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#localizacion">Localización</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-contact ms-lg-2" href="../index.html#contacto">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <img src="../images/metodologia.jpg" alt="Nuestra metodología en tu club" class="service-hero-image">
+        <div class="service-hero-content">
+            <h1>Nuestra metodología en tu club</h1>
+            <p>Implementa nuestra probada metodología de entrenamiento en tu club de pádel, ofreciendo un plus
+                profesional a tus clientes y elevando el nivel de tus jugadores.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Una metodología integral</h2>
+                <p>La experiencia de la élite al servicio de tu club</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="lead text-center mb-5">En Universal Padel Academy ponemos a disposición de tu club nuestra
+                        metodología desarrollada por Claudio Gilardoni, con más de 23 años de experiencia en el
+                        entrenamiento de jugadores de élite. Una visión 360º del pádel que ha demostrado su efectividad
+                        al más alto nivel y que ahora puede implementarse en tu club.</p>
+                </div>
+            </div>
+
+            <div class="row service-features">
+                <div class="col-md-3">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-chess"></i>
+                        <h3>Táctica</h3>
+                        <p>Desarrollamos la toma de decisiones estratégicas en función de cada situación de juego y tipo
+                            de jugador.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-hand-paper"></i>
+                        <h3>Técnica</h3>
+                        <p>Implementamos fundamentos técnicos sólidos y personalizados para optimizar la ejecución de
+                            cada golpe.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3>Preparación Física</h3>
+                        <p>Entrenamiento físico específico para mejorar el rendimiento y prevenir lesiones en la pista.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="feature-item text-center">
+                        <i class="fas fa-brain"></i>
+                        <h3>Entrenamiento Mental</h3>
+                        <p>Fortalecemos aspectos psicológicos clave como la concentración, la gestión emocional y la
+                            confianza.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Beneficios para tu club</h2>
+                <p>Potencia tu negocio con una metodología de élite</p>
+            </div>
+
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Prestigio y Diferenciación</h3>
+                        <p>Distingue tu club de la competencia ofreciendo la misma metodología que utilizan jugadores
+                            profesionales del mejor circuito mundial.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Fidelización de Clientes</h3>
+                        <p>Aumenta la satisfacción y retención de tus alumnos al ofrecerles un sistema de entrenamiento
+                            profesional con resultados probados.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Crecimiento de Negocio</h3>
+                        <p>Atrae nuevos clientes y aumenta tus ingresos gracias a un servicio de mayor valor añadido y
+                            reconocimiento en el mercado.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Formación Continua</h3>
+                        <p>Tu equipo técnico recibirá formación actualizada y soporte constante para implementar
+                            correctamente la metodología.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-content">
+            <p class="quote-text">La disciplina, la perseverancia y la capacidad de sufrimiento son la base del éxito de
+                cualquier deportista.</p>
+            <span>- Claudio Gilardoni, Head Coach de Universal Padel Academy</span>
+        </div>
+    </section>
+
+    <!-- Metodología Section -->
+    <section class="method-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra metodología</h2>
+                <p>Un sistema de entrenamiento integral y estructurado</p>
+            </div>
+
+            <div class="method-container">
+                <div class="method-header">
+                    <h3>Visión 360º del Pádel</h3>
+                </div>
+                <div class="method-content">
+                    <div class="method-item">
+                        <div class="method-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="method-text">
+                            <h4>Evaluación personalizada</h4>
+                            <p>Análisis detallado del nivel técnico, táctico, físico y mental de cada jugador para
+                                establecer un punto de partida y objetivos individualizados.</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="method-text">
+                            <h4>Estructura progresiva</h4>
+                            <p>Planificación por niveles y etapas con objetivos claros y medibles que permiten un
+                                desarrollo continuo y sostenible del jugador.</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="method-text">
+                            <h4>Enfoque equilibrado</h4>
+                            <p>Integración armónica de los cuatro pilares (técnica, táctica, físico y mental) adaptada a
+                                las necesidades específicas de cada jugador.</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="method-text">
+                            <h4>Feedback constante</h4>
+                            <p>Sistema de evaluación y seguimiento que permite ajustar y optimizar el entrenamiento en
+                                tiempo real para maximizar el progreso de cada jugador.</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="method-text">
+                            <h4>Análisis audiovisual</h4>
+                            <p>Utilización de recursos tecnológicos para el análisis técnico-táctico que facilita la
+                                comprensión y corrección de aspectos específicos del juego.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proceso de implementación</h2>
+                <p>Adaptamos nuestra metodología a las necesidades específicas de tu club</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h3>Diagnóstico inicial</h3>
+                    <p>Evaluamos el estado actual de tu escuela, analizando instalaciones, estructura, nivel técnico y
+                        necesidades específicas.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h3>Formación del equipo técnico</h3>
+                    <p>Capacitamos a tus entrenadores en nuestra metodología para garantizar una correcta implementación
+                        desde el inicio.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h3>Implementación gradual</h3>
+                    <p>Introducimos el sistema de trabajo de forma progresiva, adaptándolo a las características y ritmo
+                        de tu club.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h3>Seguimiento y apoyo</h3>
+                    <p>Realizamos supervisión continua y proporcionamos soporte técnico para asegurar la correcta
+                        aplicación de la metodología.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">5</div>
+                    <h3>Evaluación de resultados</h3>
+                    <p>Medimos el impacto y los resultados obtenidos, realizando ajustes para optimizar la efectividad
+                        del programa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Eleva el nivel de tu club</h2>
+                <p>Implementa la metodología profesional de Universal Padel Academy y ofrece un servicio diferencial a
+                    tus clientes.</p>
+                <a href="../index.html#contacto" class="btn-cta">Solicita información</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Universal Padel Academy</h3>
+                    <p>Un espacio dedicado íntegramente al deporte que amamos. Pádel, pádel y más pádel.</p>
+                    <p>Este divertido deporte te atrapa y no conoce fronteras, se practica en los 5 continentes y es
+                        capaz de unir a distintas nacionalidades, culturas y lenguas haciéndolo universal.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="../index.html#sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="../index.html#servicios">Servicios</a></li>
+                        <li><a href="../index.html#instalaciones">Instalaciones</a></li>
+                        <li><a href="../index.html#localizacion">Localización</a></li>
+                        <li><a href="../index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Avenida del Alcalde Eduardo Zaplana nº7, 03502
+                            Benidorm (Alicante)</li>
+                        <li><i class="fas fa-envelope"></i> info@universalpadelacademy.com</li>
+                        <li><i class="fas fa-globe"></i> www.universalpadelacademy.com</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="https://instagram.com/universalpadel_academy" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/universalpadelacademy" class="social-link" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/universalpadel" class="social-link" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Universal Padel Academy. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
